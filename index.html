@@ -1,62 +1,79 @@
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>ניהול – משימות חתונה</title>
-<style>
-  body { font-family: 'Frank Ruhl Libre', Georgia, serif; background: #f6f0e4; color: #241512; padding: 24px; max-width: 900px; margin: 0 auto; }
-  h1 { color: #5c1a24; }
-  .mission-group { background: #efe6d3; border: 1px solid #a98953; border-radius: 6px; padding: 16px; margin-bottom: 20px; }
-  .mission-group h2 { margin: 0 0 10px; color: #3a0f16; font-size: 20px; }
-  table { width: 100%; border-collapse: collapse; font-size: 14px; }
-  th, td { text-align: right; padding: 6px 8px; border-bottom: 1px solid #ddd; }
-  a { color: #5c1a24; }
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>משימת החתונה</title>
+  <link rel="stylesheet" href="/style.css" />
 </head>
+
 <body>
-  <h1>העלאות לפי משימה</h1>
-  <div id="content">טוען…</div>
 
-  <script>
-    fetch('/api/admin/uploads')
-      .then(r => r.json())
-      .then(data => {
-        const container = document.getElementById('content');
-        container.innerHTML = '';
-        const missionIds = Object.keys(data).sort();
+  <main class="card">
 
-        if (missionIds.length === 0) {
-          container.textContent = 'עדיין אין העלאות.';
-          return;
-        }
+    <section id="missionView">
 
-        for (const id of missionIds) {
-          const group = data[id];
-          const div = document.createElement('div');
-          div.className = 'mission-group';
+      <div class="eyebrow">WEDDING MISSION</div>
 
-          const rows = group.uploads.map(u => `
-            <tr>
-              <td>${u.original_filename}</td>
-              <td>${new Date(u.upload_timestamp).toLocaleString('he-IL')}</td>
-              <td>${u.drive_link ? `<a href="${u.drive_link}" target="_blank">פתח בדרייב</a>` : 'ממתין לסנכרון'}</td>
-            </tr>
-          `).join('');
+      <h1 id="missionNumber"></h1>
 
-          div.innerHTML = `
-            <h2>#${id} — ${group.mission_title}</h2>
-            <table>
-              <thead><tr><th>קובץ</th><th>זמן</th><th>דרייב</th></tr></thead>
-              <tbody>${rows}</tbody>
-            </table>
-          `;
-          container.appendChild(div);
-        }
-      })
-      .catch(() => {
-        document.getElementById('content').textContent = 'שגיאה בטעינת הנתונים.';
-      });
-  </script>
+      <p id="missionText">
+        טוען את המשימה…
+      </p>
+
+      <div class="upload-buttons">
+
+        <label class="upload-btn">
+          📸 צלמו עכשיו
+          <input
+            id="captureInput"
+            type="file"
+            accept="image/*,video/*"
+            capture="environment"
+            hidden
+          />
+        </label>
+
+        <label class="upload-btn secondary">
+          📁 בחרו מהטלפון
+          <input
+            id="chooseInput"
+            type="file"
+            accept="image/*,video/*"
+            hidden
+          />
+        </label>
+
+      </div>
+
+      <p id="statusText"></p>
+
+      <div class="date">
+        11.3.27
+      </div>
+
+    </section>
+
+
+    <section id="successView" class="hidden">
+
+      <div class="eyebrow">MISSION COMPLETE</div>
+
+      <h1>המשימה הושלמה ❤️</h1>
+
+      <p>
+        תודה שהשארתם לנו זיכרון מהחתונה
+      </p>
+
+      <div class="date">
+        11.3.27
+      </div>
+
+    </section>
+
+  </main>
+
+  <script src="/app.js"></script>
+
 </body>
 </html>
