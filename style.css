@@ -2,10 +2,10 @@
   --burgundy: #6b1724;
   --burgundy-dark: #471018;
   --gold: #a98243;
-  --gold-light: #ceb16f;
+  --gold-light: #cfb67a;
   --cream: #f7edda;
-  --brown: #35231c;
-  --muted: #8e7962;
+  --brown: #34241d;
+  --muted: #907b66;
 }
 
 * {
@@ -16,70 +16,90 @@ html,
 body {
   margin: 0;
   width: 100%;
-  height: 100%;
+  min-height: 100%;
 }
 
 body {
   font-family: "Heebo", sans-serif;
   color: var(--brown);
-  overflow: hidden;
 
-  background:
+  background-image:
     linear-gradient(
-      rgba(241, 224, 192, 0.20),
-      rgba(75, 33, 26, 0.18)
+      rgba(224, 198, 156, 0.20),
+      rgba(89, 47, 34, 0.18)
     ),
     url("/couple-vintage-bg.png");
 
   background-size: cover;
-  background-position: 50% 35%;
+  background-position: 50% 37%;
   background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+/* vintage photo treatment */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      rgba(124, 84, 52, 0.08),
+      rgba(90, 51, 36, 0.10)
+    );
+
+  backdrop-filter:
+    sepia(0.28)
+    saturate(0.78)
+    contrast(0.93)
+    brightness(0.98);
 }
 
 .page {
-  position: relative;
   width: 100%;
-  height: 100dvh;
-  overflow: hidden;
+  min-height: 100dvh;
+
+  padding:
+    max(14px, env(safe-area-inset-top))
+    12px
+    max(24px, env(safe-area-inset-bottom));
 
   background:
     linear-gradient(
       to bottom,
-      rgba(248, 235, 211, 0.44) 0%,
-      rgba(248, 235, 211, 0.18) 30%,
-      rgba(248, 235, 211, 0.04) 50%,
-      rgba(83, 34, 28, 0.08) 100%
+      rgba(246, 229, 199, 0.26) 0%,
+      rgba(246, 229, 199, 0.08) 38%,
+      rgba(88, 40, 32, 0.03) 100%
     );
 }
 
-/* ---------- TOP ---------- */
+/* ---------------- HEADER ---------------- */
 
 .hero {
-  position: absolute;
-  top: max(14px, env(safe-area-inset-top));
-  left: 50%;
-  transform: translateX(-50%);
-
-  width: 92%;
+  width: 94%;
+  margin: 0 auto 12px;
   text-align: center;
-  z-index: 3;
 }
 
 .small-title {
   margin-bottom: 2px;
 
   font-family: "Cormorant Garamond", serif;
-  font-size: 12px;
+  font-size: 13px;
   letter-spacing: 0.30em;
-  color: #6f542f;
+
+  color: #6d502b;
 }
 
 .hero h1 {
   margin: 0;
 
   font-family: "Cormorant Garamond", serif;
-  font-size: clamp(42px, 10.5vw, 61px);
-  line-height: 0.93;
+
+  font-size: clamp(50px, 12vw, 72px);
+  line-height: 0.94;
 
   font-weight: 600;
   letter-spacing: -0.035em;
@@ -93,99 +113,107 @@ body {
 }
 
 .date {
-  margin-top: 6px;
+  margin-top: 7px;
 
   font-family: "Cormorant Garamond", serif;
-  font-size: clamp(27px, 6.5vw, 37px);
-  line-height: 1;
+
+  font-size: clamp(39px, 10vw, 58px);
+  line-height: 0.96;
 
   font-weight: 600;
-  color: #765824;
+
+  color: #795a27;
 }
 
-/* ---------- CARD POSITION ---------- */
+/* ---------------- MAIN ---------------- */
 
 main {
-  position: absolute;
+  width: 94%;
+  max-width: 620px;
 
-  left: 50%;
-  bottom: max(10px, env(safe-area-inset-bottom));
-
-  transform: translateX(-50%);
-
-  width: 92%;
-
-  z-index: 4;
+  margin: 0 auto;
 }
+
+/* ---------------- CARD ---------------- */
 
 .mission-card {
   width: 100%;
-  max-height: 64dvh;
 
-  padding: 15px 14px 13px;
+  padding: 16px 14px 15px;
 
   text-align: center;
 
   border-radius: 24px;
 
+  /*
+    More transparent so the photo is visible
+  */
   background:
     linear-gradient(
       145deg,
-      rgba(252, 245, 232, 0.92),
-      rgba(247, 235, 214, 0.88)
+      rgba(252, 245, 230, 0.74),
+      rgba(246, 232, 207, 0.68)
     );
 
-  border: 1px solid rgba(169, 126, 59, 0.82);
+  border: 1px solid rgba(169, 126, 59, 0.80);
 
   box-shadow:
-    0 12px 35px rgba(47, 25, 16, 0.22),
-    inset 0 0 0 4px rgba(255, 253, 246, 0.34);
+    0 12px 34px rgba(47, 25, 16, 0.18),
+    inset 0 0 0 4px rgba(255, 253, 246, 0.19);
 
-  backdrop-filter: blur(3px);
+  backdrop-filter: blur(1px);
 }
 
-/* ---------- MISSION ---------- */
+/* ---------------- MISSION HEADER ---------------- */
 
 .mission-head {
-  margin: 0 0 5px;
+  margin: 0;
 }
 
 .mission-label {
   font-size: 14px;
   font-weight: 400;
-  color: #75625b;
+
+  color: #705e57;
 }
 
 .mission-number {
-  margin: 3px 0 0;
+  margin: 5px 0 0;
 
   font-family: "Cormorant Garamond", serif;
 
-  font-size: clamp(58px, 15vw, 82px);
-  line-height: 0.90;
+  font-size: clamp(64px, 16vw, 88px);
+  line-height: 0.92;
 
   font-weight: 600;
 
   color: var(--burgundy);
 }
 
+/*
+  IMPORTANT:
+  Extra space between #037 and mission text
+*/
 .mission-text {
-  max-width: 95%;
+  max-width: 96%;
 
-  margin: 11px auto 13px;
+  margin:
+    22px
+    auto
+    16px;
 
-  font-size: clamp(18px, 4.4vw, 22px);
-  line-height: 1.28;
+  font-size: clamp(18px, 4.5vw, 23px);
+  line-height: 1.34;
 
   font-weight: 500;
 
   color: #34231d;
 }
 
-/* ---------- NAME ---------- */
+/* ---------------- NAME ---------------- */
 
 .name-area {
-  margin: 0 auto 9px;
+  margin: 0 auto 10px;
 }
 
 .name-area label {
@@ -210,7 +238,7 @@ main {
 
 .name-area input {
   width: 100%;
-  height: 37px;
+  height: 39px;
 
   padding: 0 10px;
 
@@ -219,7 +247,7 @@ main {
 
   outline: none;
 
-  background: rgba(255, 251, 242, 0.72);
+  background: rgba(255, 251, 242, 0.58);
 
   text-align: center;
 
@@ -230,29 +258,30 @@ main {
 }
 
 .name-area input::placeholder {
-  color: #a2917d;
+  color: #9f8e7b;
 }
 
-/* ---------- CHOOSE FILE ---------- */
+/* ---------------- FILE CHOICE ---------------- */
 
 .upload-title {
-  margin: 0 0 7px;
+  margin: 1px 0 7px;
 
   font-size: 14px;
   font-weight: 500;
 
-  color: #533a32;
+  color: #543c34;
 }
 
 .upload-buttons {
   display: grid;
+
   grid-template-columns: 1fr 1fr;
 
   gap: 8px;
 }
 
 .upload-btn {
-  min-height: 68px;
+  min-height: 69px;
 
   padding: 8px 6px;
 
@@ -270,7 +299,7 @@ main {
   cursor: pointer;
 
   box-shadow:
-    0 4px 10px rgba(64, 35, 20, 0.12);
+    0 4px 11px rgba(64, 35, 20, 0.10);
 }
 
 .upload-btn strong {
@@ -293,14 +322,14 @@ main {
   background:
     linear-gradient(
       145deg,
-      #b18a49,
+      #b28b49,
       #8d682e
     );
 
   color: #fff9ed;
 }
 
-/* ---------- CLEAN ICONS ---------- */
+/* ---------------- OUTLINE ICONS ---------------- */
 
 .line-icon {
   position: relative;
@@ -385,12 +414,12 @@ main {
   transform: skewY(-34deg);
 }
 
-/* ---------- SELECTED FILE ---------- */
+/* ---------------- FILE READY ---------------- */
 
 .selected-file {
-  margin-top: 7px;
+  margin-top: 8px;
 
-  padding: 7px 9px;
+  padding: 8px 9px;
 
   display: flex;
 
@@ -401,10 +430,9 @@ main {
 
   border-radius: 9px;
 
-  border: 1px solid rgba(156, 115, 53, 0.42);
+  border: 1px solid rgba(156, 115, 53, 0.44);
 
-  background:
-    rgba(255, 250, 238, 0.75);
+  background: rgba(255, 250, 238, 0.61);
 }
 
 .selected-check {
@@ -419,6 +447,7 @@ main {
   border-radius: 50%;
 
   background: var(--burgundy);
+
   color: white;
 
   font-size: 12px;
@@ -449,13 +478,13 @@ main {
   color: var(--muted);
 }
 
-/* ---------- FINAL UPLOAD ---------- */
+/* ---------------- UPLOAD BUTTON ---------------- */
 
 .final-upload {
   width: 100%;
-  height: 39px;
+  height: 41px;
 
-  margin-top: 7px;
+  margin-top: 8px;
 
   border: 1px solid var(--gold-light);
   border-radius: 10px;
@@ -477,14 +506,14 @@ main {
   cursor: pointer;
 }
 
-/* ---------- LOADING ---------- */
+/* ---------------- LOADING ---------------- */
 
 .loading-box {
-  margin-top: 7px;
+  margin-top: 8px;
 
-  padding: 9px;
+  padding: 10px;
 
-  min-height: 62px;
+  min-height: 65px;
 
   display: flex;
 
@@ -496,7 +525,7 @@ main {
   border-radius: 11px;
 
   background:
-    rgba(91, 24, 33, 0.95);
+    rgba(91, 24, 33, 0.94);
 
   color: #fff7e9;
 }
@@ -543,17 +572,18 @@ main {
   color: var(--burgundy);
 }
 
-/* ---------- WHATSAPP ---------- */
+/* ---------------- WHATSAPP ---------------- */
 
 .whatsapp {
-  margin-top: 8px;
-  padding-top: 7px;
+  margin-top: 10px;
+  padding-top: 8px;
 
-  border-top: 1px solid rgba(162, 122, 50, 0.34);
+  border-top:
+    1px solid rgba(162, 122, 50, 0.34);
 }
 
 .whatsapp-title {
-  margin-bottom: 5px;
+  margin-bottom: 6px;
 
   font-size: 12px;
   font-weight: 500;
@@ -563,15 +593,16 @@ main {
 
 .whatsapp-buttons {
   display: grid;
+
   grid-template-columns: 1fr 1fr;
 
   gap: 7px;
 }
 
 .whatsapp-buttons a {
-  min-height: 43px;
+  min-height: 46px;
 
-  padding: 4px;
+  padding: 5px;
 
   display: flex;
 
@@ -582,11 +613,13 @@ main {
 
   text-decoration: none;
 
-  border: 1px solid rgba(153, 111, 48, 0.50);
+  border:
+    1px solid rgba(153, 111, 48, 0.50);
+
   border-radius: 9px;
 
   background:
-    rgba(255, 249, 237, 0.70);
+    rgba(255, 249, 237, 0.58);
 
   color: var(--burgundy-dark);
 }
@@ -606,10 +639,10 @@ main {
   color: #7e6237;
 }
 
-/* ---------- SUCCESS ---------- */
+/* ---------------- SUCCESS ---------------- */
 
 .success-card {
-  padding: 26px 18px;
+  padding: 30px 18px;
 }
 
 .success-mark {
@@ -637,7 +670,7 @@ main {
 
   font-family: "Cormorant Garamond", serif;
 
-  font-size: 32px;
+  font-size: 34px;
 
   color: var(--burgundy);
 }
@@ -653,7 +686,7 @@ main {
 
   font-family: "Cormorant Garamond", serif;
 
-  font-size: 26px;
+  font-size: 28px;
 
   color: var(--gold);
 }
@@ -662,39 +695,53 @@ main {
   display: none !important;
 }
 
-/* ---------- SMALL PHONES ---------- */
+/* ---------------- MOBILE ---------------- */
 
-@media (max-height: 740px) {
+@media (max-width: 600px) {
 
-  .hero h1 {
-    font-size: 39px;
+  /*
+    Allow scrolling again.
+    Important when selected file / loading adds height.
+  */
+  body {
+    background-position: 50% 34%;
+    background-attachment: scroll;
   }
 
-  .date {
-    font-size: 26px;
+  .page {
+    min-height: 100dvh;
+    overflow: visible;
   }
 
-  main {
-    width: 93%;
+  .hero {
+    margin-bottom: 11px;
   }
 
   .mission-card {
-    max-height: 65dvh;
-    padding-top: 10px;
+    padding-left: 13px;
+    padding-right: 13px;
+  }
+
+}
+
+/* short screens */
+@media (max-height: 720px) {
+
+  .hero h1 {
+    font-size: 47px;
+  }
+
+  .date {
+    font-size: 37px;
   }
 
   .mission-number {
-    font-size: 57px;
+    font-size: 63px;
   }
 
   .mission-text {
-    margin-top: 8px;
-    margin-bottom: 8px;
-
+    margin-top: 20px;
     font-size: 18px;
   }
 
-  .upload-btn {
-    min-height: 61px;
-  }
 }
