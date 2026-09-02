@@ -1,0 +1,143 @@
+@import url('https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@400;500;700&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap');
+
+:root {
+  --ivory: #f6f0e4;
+  --parchment: #efe6d3;
+  --burgundy: #5c1a24;
+  --burgundy-dark: #3a0f16;
+  --ink: #241512;
+  --gold: #a98953;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  background: var(--ivory);
+  background-image:
+    radial-gradient(circle at 20% 10%, rgba(169,137,83,0.08), transparent 40%),
+    radial-gradient(circle at 80% 90%, rgba(92,26,36,0.06), transparent 45%);
+  font-family: 'Frank Ruhl Libre', 'EB Garamond', Georgia, serif;
+  color: var(--ink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 16px;
+}
+
+.card {
+  width: 100%;
+  max-width: 420px;
+  background: var(--parchment);
+  border: 1px solid var(--gold);
+  outline: 1px solid var(--burgundy);
+  outline-offset: -6px;
+  border-radius: 4px;
+  padding: 36px 24px 28px;
+  text-align: center;
+  box-shadow: 0 8px 28px rgba(58, 15, 22, 0.15);
+  position: relative;
+}
+
+.ornament {
+  color: var(--gold);
+  letter-spacing: 10px;
+  font-size: 14px;
+  margin: 0 0 10px;
+}
+
+.ornament-bottom {
+  margin: 22px 0 10px;
+}
+
+.eyebrow {
+  font-size: 15px;
+  letter-spacing: 4px;
+  color: var(--burgundy);
+  text-transform: uppercase;
+  margin: 0 0 22px;
+  font-weight: 500;
+}
+
+.mission-number {
+  font-size: 17px;
+  color: var(--gold);
+  letter-spacing: 2px;
+  margin: 0 0 14px;
+}
+
+.mission-text {
+  font-size: 26px;
+  line-height: 1.5;
+  color: var(--burgundy-dark);
+  font-weight: 700;
+  margin: 0 0 32px;
+  min-height: 70px;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.btn {
+  display: block;
+  width: 100%;
+  padding: 18px 14px;
+  border-radius: 6px;
+  font-size: 18px;
+  font-family: inherit;
+  cursor: pointer;
+  border: 1px solid var(--burgundy);
+  transition: transform 0.08s ease;
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+.btn-primary {
+  background: var(--burgundy);
+  color: var(--ivory);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--burgundy);
+}
+
+.status-text {
+  margin-top: 18px;
+  font-size: 14px;
+  color: var(--burgundy);
+  min-height: 20px;
+}
+
+.success-message {
+  font-size: 30px;
+  color: var(--burgundy-dark);
+  font-weight: 700;
+  margin: 40px 0 10px;
+}
+
+.success-sub {
+  font-size: 16px;
+  color: var(--burgundy);
+  margin-bottom: 30px;
+}
+
+.wedding-date {
+  margin: 18px 0 0;
+  letter-spacing: 3px;
+  color: var(--gold);
+  font-size: 15px;
+}
+
+.hidden {
+  display: none;
+}
