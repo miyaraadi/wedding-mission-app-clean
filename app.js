@@ -27,7 +27,7 @@
   const ADI_PHONE = '972543330598';
   const NITAY_PHONE = '972523357812';
 
-  let selectedFile = null;
+  let selectedFiles = [];
 
   if (!missionId) {
     missionNumberEl.textContent = '';
@@ -58,7 +58,7 @@
   function createWhatsappMessage() {
     let message =
       `היי ❤️ לא הצלחתי להעלות דרך האתר.\n` +
-      `אני שולח/ת כאן את התמונה או הסרטון של משימה #${missionId}.`;
+      `אני שולח/ת כאן את התמונות או הסרטונים של משימה #${missionId}.`;
 
     const name = getGuestName();
 
@@ -87,30 +87,71 @@
   whatsappAdi.addEventListener('click', updateWhatsappLinks);
   whatsappNitay.addEventListener('click', updateWhatsappLinks);
 
-  function selectFile(file) {
-    if (!file) return;
+  function isSameFile(a, b) {
+    return (
+      a.name === b.name &&
+      a.size === b.size &&
+      a.lastModified === b.lastModified
+    );
+  }
 
-    selectedFile = file;
+  function addFiles(fileList) {
+    const newFiles = Array.from(fileList || []);
 
-    selectedFileName.textContent = file.name;
+    if (!newFiles.length) return;
+
+    newFiles.forEach((file) => {
+      const alreadyExists = selectedFiles.some((existingFile) =>
+        isSameFile(existingFile, file)
+      );
+
+      if (!alreadyExists) {
+        selectedFiles.push(file);
+      }
+    });
+
+    updateSelectedFilesUI();
+
+    captureInput.value = '';
+    chooseInput.value = '';
+  }
+
+  function updateSelectedFilesUI() {
+    if (selectedFiles.length === 0) {
+      selectedFileBox.classList.add('hidden');
+      uploadButton.classList.add('hidden');
+      selectedFileName.textContent = '';
+      return;
+    }
 
     selectedFileBox.classList.remove('hidden');
     uploadButton.classList.remove('hidden');
+
+    if (selectedFiles.length === 1) {
+      selectedFileName.textContent = selectedFiles[0].name;
+      uploadButton.textContent = 'העלאת הקובץ';
+    } else {
+      selectedFileName.textContent =
+        `נבחרו ${selectedFiles.length} קבצים`;
+      uploadButton.textContent =
+        `העלאת ${selectedFiles.length} קבצים`;
+    }
 
     statusEl.textContent = '';
   }
 
   captureInput.addEventListener('change', (e) => {
-    selectFile(e.target.files[0]);
+    addFiles(e.target.files);
   });
 
   chooseInput.addEventListener('change', (e) => {
-    selectFile(e.target.files[0]);
+    addFiles(e.target.files);
   });
 
   uploadButton.addEventListener('click', async () => {
-    if (!selectedFile) {
-      statusEl.textContent = 'בחרו קודם תמונה או סרטון.';
+    if (!selectedFiles.length) {
+      statusEl.textContent =
+        'בחרו קודם תמונה או סרטון.';
       return;
     }
 
@@ -125,33 +166,53 @@
 
     statusEl.textContent = '';
 
-    const formData = new FormData();
-
-    formData.append('file', selectedFile);
-    formData.append('mission_id', missionId);
-
-    const name = getGuestName();
-
-    if (name) {
-      formData.append('uploader_name', name);
-    }
+    const guestName = getGuestName();
 
     try {
-      const res = await fetch('/api/upload', {
-        method: 'POST',
-        body: formData,
-      });
+      for (let i = 0; i < selectedFiles.length; i++) {
+        const file = selectedFiles[i];
 
-      let data = {};
+        const strongEl = loadingBox.querySelector('strong');
+        const spanEl = loadingBox.querySelector('span');
 
-      try {
-        data = await res.json();
-      } catch (_) {}
+        if (strongEl) {
+          strongEl.textContent =
+            selectedFiles.length === 1
+              ? 'מעלים את הזיכרון שלכם…'
+              : `מעלים קובץ ${i + 1} מתוך ${selectedFiles.length}…`;
+        }
 
-      if (!res.ok || !data.success) {
-        throw new Error(
-          data.message || 'ההעלאה נכשלה. נסו שוב.'
-        );
+        if (spanEl) {
+          spanEl.textContent =
+            'אל תסגרו את החלון';
+        }
+
+        const formData = new FormData();
+
+        formData.append('file', file);
+        formData.append('mission_id', missionId);
+
+        if (guestName) {
+          formData.append('uploader_name', guestName);
+        }
+
+        const res = await fetch('/api/upload', {
+          method: 'POST',
+          body: formData,
+        });
+
+        let data = {};
+
+        try {
+          data = await res.json();
+        } catch (_) {}
+
+        if (!res.ok || !data.success) {
+          throw new Error(
+            data.message ||
+              `העלאת קובץ ${i + 1} נכשלה.`
+          );
+        }
       }
 
       missionView.classList.add('hidden');
