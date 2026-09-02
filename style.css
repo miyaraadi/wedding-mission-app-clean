@@ -1,143 +1,325 @@
-@import url('https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@400;500;700&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap');
-
 :root {
-  --ivory: #f6f0e4;
-  --parchment: #efe6d3;
-  --burgundy: #5c1a24;
-  --burgundy-dark: #3a0f16;
-  --ink: #241512;
-  --gold: #a98953;
+  --burgundy: #651923;
+  --burgundy-dark: #421018;
+  --gold: #a27a32;
+  --gold-soft: #c5a25f;
+  --cream: #f4ead7;
+  --paper: rgba(246, 236, 216, 0.94);
+  --brown: #38251b;
+  --muted: #806d59;
 }
 
 * {
   box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
   margin: 0;
-  padding: 0;
   min-height: 100%;
-  background: var(--ivory);
-  background-image:
-    radial-gradient(circle at 20% 10%, rgba(169,137,83,0.08), transparent 40%),
-    radial-gradient(circle at 80% 90%, rgba(92,26,36,0.06), transparent 45%);
-  font-family: 'Frank Ruhl Libre', 'EB Garamond', Georgia, serif;
-  color: var(--ink);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 24px 16px;
 }
 
-.card {
-  width: 100%;
-  max-width: 420px;
-  background: var(--parchment);
-  border: 1px solid var(--gold);
-  outline: 1px solid var(--burgundy);
-  outline-offset: -6px;
-  border-radius: 4px;
-  padding: 36px 24px 28px;
+body {
+  font-family: Georgia, "Times New Roman", serif;
+  color: var(--brown);
+  background:
+    radial-gradient(circle at top, #e7d2a8 0%, #b88c55 55%, #654323 100%);
+}
+
+.page {
+  min-height: 100vh;
+  padding: 24px 14px 34px;
+  background:
+    linear-gradient(
+      rgba(244, 229, 198, 0.56),
+      rgba(91, 30, 26, 0.34)
+    );
+}
+
+.hero {
+  width: min(760px, 94vw);
+  margin: 0 auto 22px;
   text-align: center;
-  box-shadow: 0 8px 28px rgba(58, 15, 22, 0.15);
-  position: relative;
+  color: var(--burgundy-dark);
 }
 
-.ornament {
-  color: var(--gold);
-  letter-spacing: 10px;
-  font-size: 14px;
-  margin: 0 0 10px;
-}
-
-.ornament-bottom {
-  margin: 22px 0 10px;
-}
-
-.eyebrow {
+.small-title {
   font-size: 15px;
-  letter-spacing: 4px;
-  color: var(--burgundy);
-  text-transform: uppercase;
-  margin: 0 0 22px;
+  letter-spacing: 0.22em;
+  color: #684c28;
+  margin-bottom: 8px;
+}
+
+.hero h1 {
+  margin: 0;
+  font-size: clamp(48px, 12vw, 92px);
+  line-height: 0.95;
   font-weight: 500;
+  color: var(--burgundy);
+}
+
+.hero h1 span {
+  color: var(--gold);
+}
+
+.date {
+  margin-top: 14px;
+  font-size: clamp(36px, 8vw, 64px);
+  color: #725321;
+  font-weight: 700;
+}
+
+main {
+  width: min(700px, 94vw);
+  margin: 0 auto;
+}
+
+.mission-card {
+  width: 100%;
+  padding: 34px 22px 28px;
+  text-align: center;
+
+  background:
+    linear-gradient(
+      rgba(249, 240, 222, 0.96),
+      rgba(244, 232, 209, 0.96)
+    );
+
+  border: 1px solid rgba(151, 108, 45, 0.8);
+  border-radius: 22px;
+
+  box-shadow:
+    0 18px 50px rgba(49, 25, 15, 0.28),
+    inset 0 0 0 5px rgba(255, 252, 242, 0.45),
+    inset 0 0 0 7px rgba(151, 108, 45, 0.18);
+}
+
+.mission-label {
+  font-size: 22px;
+  color: #5e3029;
 }
 
 .mission-number {
-  font-size: 17px;
-  color: var(--gold);
-  letter-spacing: 2px;
-  margin: 0 0 14px;
+  margin: 4px 0 10px;
+  color: var(--burgundy);
+  font-size: clamp(72px, 18vw, 118px);
+  line-height: 0.92;
 }
 
 .mission-text {
-  font-size: 26px;
-  line-height: 1.5;
-  color: var(--burgundy-dark);
-  font-weight: 700;
-  margin: 0 0 32px;
-  min-height: 70px;
+  max-width: 540px;
+  margin: 0 auto 24px;
+  font-size: clamp(25px, 5vw, 34px);
+  line-height: 1.3;
+  font-weight: 600;
 }
 
-.buttons {
+.name-area {
+  max-width: 510px;
+  margin: 0 auto 24px;
+}
+
+.name-area label {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--burgundy);
+  font-size: 21px;
+  font-weight: 700;
+}
+
+.name-area input {
+  width: 100%;
+  height: 54px;
+  border: 1px solid rgba(159, 117, 51, 0.7);
+  border-radius: 10px;
+  background: rgba(255, 250, 239, 0.78);
+  color: var(--brown);
+  text-align: center;
+  padding: 0 14px;
+  outline: none;
+}
+
+.name-area input:focus {
+  border-color: var(--burgundy);
+  box-shadow: 0 0 0 3px rgba(101, 25, 35, 0.1);
+}
+
+.name-area input::placeholder {
+  color: #9a8870;
+}
+
+.error {
+  min-height: 18px;
+  margin-top: 5px;
+  color: #8b1d26;
+  font-size: 14px;
+}
+
+.upload-title {
+  margin-bottom: 13px;
+  color: #63312b;
+  font-size: 21px;
+  font-weight: 600;
+}
+
+.upload-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.upload-btn {
+  min-height: 112px;
+  padding: 16px 10px;
+  border-radius: 11px;
   display: flex;
   flex-direction: column;
-  gap: 14px;
-}
-
-.btn {
-  display: block;
-  width: 100%;
-  padding: 18px 14px;
-  border-radius: 6px;
-  font-size: 18px;
-  font-family: inherit;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
-  border: 1px solid var(--burgundy);
-  transition: transform 0.08s ease;
+
+  border: 1px solid var(--gold-soft);
+
+  box-shadow: 0 7px 16px rgba(71, 38, 17, 0.14);
 }
 
-.btn:active {
-  transform: scale(0.98);
+.upload-btn strong {
+  font-size: 20px;
+  margin-top: 5px;
 }
 
-.btn-primary {
-  background: var(--burgundy);
-  color: var(--ivory);
-}
-
-.btn-secondary {
-  background: transparent;
-  color: var(--burgundy);
-}
-
-.status-text {
-  margin-top: 18px;
+.upload-btn small {
   font-size: 14px;
-  color: var(--burgundy);
-  min-height: 20px;
+  opacity: 0.82;
 }
 
-.success-message {
-  font-size: 30px;
+.button-icon {
+  font-size: 28px;
+}
+
+.burgundy {
+  background: linear-gradient(145deg, #7a202b, #4d121a);
+  color: #fff4de;
+}
+
+.gold {
+  background: linear-gradient(145deg, #b08a45, #8b672e);
+  color: #fff8e9;
+}
+
+#statusText {
+  min-height: 22px;
+  margin-top: 13px;
+  color: var(--burgundy);
+  font-weight: 600;
+}
+
+.whatsapp {
+  margin-top: 28px;
+  padding-top: 21px;
+  border-top: 1px solid rgba(162, 122, 50, 0.45);
+}
+
+.whatsapp-title {
+  margin-bottom: 13px;
+  font-size: 21px;
   color: var(--burgundy-dark);
   font-weight: 700;
-  margin: 40px 0 10px;
 }
 
-.success-sub {
-  font-size: 16px;
-  color: var(--burgundy);
-  margin-bottom: 30px;
+.whatsapp-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
 }
 
-.wedding-date {
-  margin: 18px 0 0;
-  letter-spacing: 3px;
-  color: var(--gold);
+.whatsapp-buttons a {
+  min-height: 78px;
+  padding: 12px 8px;
+  border: 1px solid rgba(153, 111, 48, 0.65);
+  border-radius: 9px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  color: var(--burgundy-dark);
+  text-decoration: none;
+  background: rgba(255, 248, 232, 0.7);
+}
+
+.whatsapp-buttons a span {
+  margin-top: 3px;
+  direction: ltr;
   font-size: 15px;
+  color: #7a5b2b;
 }
 
 .hidden {
-  display: none;
+  display: none !important;
+}
+
+#successView {
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+#successView h2 {
+  color: var(--burgundy);
+  font-size: 38px;
+  margin: 10px 0;
+}
+
+#successView p {
+  font-size: 21px;
+}
+
+.success-names {
+  margin-top: 18px;
+  font-size: 34px;
+  color: var(--gold);
+}
+
+footer {
+  width: min(700px, 94vw);
+  margin: 22px auto 0;
+  padding: 15px;
+  text-align: center;
+  color: #f6e2bd;
+  background: rgba(81, 17, 24, 0.84);
+  border: 1px solid rgba(204, 166, 92, 0.62);
+  font-size: 18px;
+}
+
+@media (max-width: 600px) {
+  .page {
+    padding-top: 18px;
+  }
+
+  .mission-card {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .mission-text {
+    font-size: 26px;
+  }
+
+  .upload-buttons {
+    gap: 8px;
+  }
+
+  .upload-btn {
+    min-height: 104px;
+    padding: 12px 7px;
+  }
+
+  .upload-btn strong {
+    font-size: 18px;
+  }
+
+  .whatsapp-buttons {
+    gap: 8px;
+  }
 }
