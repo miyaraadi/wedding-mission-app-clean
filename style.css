@@ -1,7 +1,7 @@
 :root {
   --burgundy: #6b1724;
   --burgundy-dark: #471018;
-  --gold: #a98243;
+  --gold: #b58942;
   --gold-light: #cfb67a;
   --cream: #f7edda;
   --brown: #34241d;
@@ -19,26 +19,38 @@ body {
   min-height: 100%;
 }
 
+html {
+  overflow-y: scroll;
+}
+
 body {
+  min-height: 100vh;
+
+  overflow-x: hidden;
+  overflow-y: auto;
+
   font-family: "Heebo", sans-serif;
   color: var(--brown);
 
-background-image:
-  linear-gradient(
-    rgba(157, 105, 63, 0.08),
-    rgba(74, 39, 29, 0.12)
-  ),
-  url("/couple-vintage-bg.png");
+  background-image:
+    linear-gradient(
+      rgba(157, 105, 63, 0.08),
+      rgba(74, 39, 29, 0.12)
+    ),
+    url("/couple-vintage-bg.png");
 
   background-size: cover;
-  background-position: 50% 37%;
+  background-position: 50% 34%;
   background-repeat: no-repeat;
   background-attachment: fixed;
 }
 
-/* vintage photo treatment */
+
+/* subtle vintage photo */
+
 body::before {
   content: "";
+
   position: fixed;
   inset: 0;
 
@@ -59,39 +71,51 @@ body::before {
     brightness(0.98);
 }
 
+
 .page {
   width: 100%;
-  min-height: 100dvh;
+
+  min-height: 100vh;
 
   padding:
     max(14px, env(safe-area-inset-top))
     12px
-    max(24px, env(safe-area-inset-bottom));
+    max(30px, env(safe-area-inset-bottom));
+
+  overflow: visible;
 
   background:
     linear-gradient(
       to bottom,
-      rgba(246, 229, 199, 0.26) 0%,
-      rgba(246, 229, 199, 0.08) 38%,
-      rgba(88, 40, 32, 0.03) 100%
+      rgba(246, 229, 199, 0.19),
+      rgba(246, 229, 199, 0.04) 40%,
+      rgba(88, 40, 32, 0.03)
     );
 }
 
-/* ---------------- HEADER ---------------- */
+
+/* ---------- HERO ---------- */
 
 .hero {
-  width: 94%;
-  margin: 0 auto 12px;
+  width: 95%;
+
+  margin: 0 auto 10px;
+
   text-align: center;
 }
+
 
 .small-title {
   display: inline-block;
 
-  margin-bottom: 6px;
+  margin-bottom: 5px;
+
   padding: 4px 14px 5px;
 
-  font-family: "Cormorant Garamond", serif;
+  font-family:
+    "Cormorant Garamond",
+    serif;
+
   font-size: 17px;
   font-weight: 600;
 
@@ -99,19 +123,23 @@ body::before {
 
   color: #6f512d;
 
-  background: rgba(255, 252, 246, 0.96);
+  background:
+    rgba(255, 252, 246, 0.96);
 
   border-radius: 14px;
-
-  box-shadow:
-    0 3px 10px rgba(74, 45, 24, 0.10);
 }
+
+
 .hero h1 {
   margin: 0;
 
-  font-family: "Cormorant Garamond", serif;
+  font-family:
+    "Cormorant Garamond",
+    serif;
 
-  font-size: clamp(52px, 12vw, 78px);
+  font-size:
+    clamp(52px, 12vw, 78px);
+
   line-height: 0.92;
 
   font-weight: 600;
@@ -123,19 +151,27 @@ body::before {
   white-space: nowrap;
 }
 
+
 .hero h1 span {
   color: var(--gold);
+
   font-weight: 500;
 
-  margin: 0 0.06em;
+  margin:
+    0 0.06em;
 }
+
 
 .date {
   margin-top: 3px;
 
-  font-family: "Playfair Display", serif;
+  font-family:
+    "Playfair Display",
+    serif;
 
-  font-size: clamp(58px, 15vw, 84px);
+  font-size:
+    clamp(58px, 15vw, 84px);
+
   line-height: 1;
 
   font-weight: 600;
@@ -147,29 +183,40 @@ body::before {
   text-shadow: none;
 }
 
-/* ---------------- MAIN ---------------- */
+
+/* ---------- MAIN ---------- */
 
 main {
+  position: static;
+
   width: 94%;
   max-width: 620px;
 
   margin: 0 auto;
+
+  transform: none;
 }
 
-/* ---------------- CARD ---------------- */
+
+/* ---------- CARD ---------- */
 
 .mission-card {
+  position: relative;
+
   width: 100%;
 
-  padding: 16px 14px 15px;
+  height: auto;
+  max-height: none;
+
+  overflow: visible;
+
+  padding:
+    16px 14px 15px;
 
   text-align: center;
 
   border-radius: 24px;
 
-  /*
-    More transparent so the photo is visible
-  */
   background:
     linear-gradient(
       145deg,
@@ -177,33 +224,45 @@ main {
       rgba(246, 232, 207, 0.54)
     );
 
-  border: 1px solid rgba(169, 126, 59, 0.80);
+  border:
+    1px solid
+    rgba(169, 126, 59, 0.80);
 
   box-shadow:
-    0 12px 34px rgba(47, 25, 16, 0.18),
-    inset 0 0 0 4px rgba(255, 253, 246, 0.19);
+    0 12px 34px
+    rgba(47, 25, 16, 0.18),
+    inset 0 0 0 4px
+    rgba(255, 253, 246, 0.16);
 
-  backdrop-filter: blur(0.5px);}
+  backdrop-filter: blur(0.5px);
+}
 
-/* ---------------- MISSION HEADER ---------------- */
+
+/* ---------- MISSION ---------- */
 
 .mission-head {
   margin: 0;
 }
 
+
 .mission-label {
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 400;
 
   color: #705e57;
 }
 
+
 .mission-number {
   margin: 5px 0 0;
 
-  font-family: "Cormorant Garamond", serif;
+  font-family:
+    "Cormorant Garamond",
+    serif;
 
-  font-size: clamp(64px, 16vw, 88px);
+  font-size:
+    clamp(64px, 16vw, 88px);
+
   line-height: 0.92;
 
   font-weight: 600;
@@ -211,10 +270,7 @@ main {
   color: var(--burgundy);
 }
 
-/*
-  IMPORTANT:
-  Extra space between #037 and mission text
-*/
+
 .mission-text {
   max-width: 96%;
 
@@ -223,7 +279,9 @@ main {
     auto
     16px;
 
-  font-size: clamp(18px, 4.5vw, 23px);
+  font-size:
+    clamp(19px, 4.5vw, 23px);
+
   line-height: 1.34;
 
   font-weight: 500;
@@ -231,11 +289,14 @@ main {
   color: #34231d;
 }
 
-/* ---------------- NAME ---------------- */
+
+/* ---------- NAME ---------- */
 
 .name-area {
-  margin: 0 auto 10px;
+  margin:
+    0 auto 11px;
 }
+
 
 .name-area label {
   position: relative;
@@ -244,20 +305,24 @@ main {
 
   width: fit-content;
 
-  margin: 0 auto 5px;
+  margin:
+    0 auto 5px;
 
   font-size: 16px;
   font-weight: 500;
 
   color: var(--burgundy);
 }
+
+
 .name-area label span {
   position: absolute;
 
   right: 100%;
   top: 50%;
 
-  transform: translateY(-50%);
+  transform:
+    translateY(-50%);
 
   margin-right: 7px;
 
@@ -269,56 +334,72 @@ main {
   color: var(--muted);
 }
 
+
 .name-area input {
   width: 100%;
-  height: 39px;
+
+  height: 41px;
 
   padding: 0 10px;
 
-  border: 1px solid rgba(159, 117, 51, 0.58);
+  border:
+    1px solid
+    rgba(159, 117, 51, 0.58);
+
   border-radius: 10px;
 
   outline: none;
 
-  background: rgba(255, 251, 242, 0.58);
+  background:
+    rgba(255, 251, 242, 0.58);
 
   text-align: center;
 
-  font-family: "Heebo", sans-serif;
+  font-family:
+    "Heebo",
+    sans-serif;
+
   font-size: 15px;
 
   color: var(--brown);
 }
 
+
 .name-area input::placeholder {
   color: #9f8e7b;
 }
 
-/* ---------------- FILE CHOICE ---------------- */
+
+/* ---------- UPLOAD ---------- */
 
 .upload-title {
-  margin: 1px 0 7px;
+  margin:
+    1px 0 8px;
 
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 500;
 
   color: #543c34;
 }
 
+
 .upload-buttons {
   display: grid;
 
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns:
+    1fr 1fr;
 
   gap: 8px;
 }
 
+
 .upload-btn {
-  min-height: 69px;
+  min-height: 70px;
 
   padding: 8px 6px;
 
   display: flex;
+
   flex-direction: column;
 
   align-items: center;
@@ -327,18 +408,20 @@ main {
   gap: 4px;
 
   border-radius: 12px;
-  border: 1px solid var(--gold-light);
+
+  border:
+    1px solid
+    var(--gold-light);
 
   cursor: pointer;
-
-  box-shadow:
-    0 4px 11px rgba(64, 35, 20, 0.10);
 }
+
 
 .upload-btn strong {
   font-size: 14px;
   font-weight: 500;
 }
+
 
 .burgundy {
   background:
@@ -351,6 +434,7 @@ main {
   color: #fff8eb;
 }
 
+
 .gold {
   background:
     linear-gradient(
@@ -362,7 +446,8 @@ main {
   color: #fff9ed;
 }
 
-/* ---------------- OUTLINE ICONS ---------------- */
+
+/* ---------- ICONS ---------- */
 
 .line-icon {
   position: relative;
@@ -373,10 +458,14 @@ main {
   height: 20px;
 }
 
+
 .camera-icon {
-  border: 1.6px solid currentColor;
+  border:
+    1.6px solid currentColor;
+
   border-radius: 5px;
 }
+
 
 .camera-icon::before {
   content: "";
@@ -389,11 +478,15 @@ main {
   top: -5px;
   left: 7px;
 
-  border: 1.6px solid currentColor;
+  border:
+    1.6px solid currentColor;
+
   border-bottom: 0;
 
-  border-radius: 3px 3px 0 0;
+  border-radius:
+    3px 3px 0 0;
 }
+
 
 .camera-icon::after {
   content: "";
@@ -406,14 +499,20 @@ main {
   top: 5px;
   left: 7px;
 
-  border: 1.6px solid currentColor;
+  border:
+    1.6px solid currentColor;
+
   border-radius: 50%;
 }
 
+
 .image-icon {
-  border: 1.6px solid currentColor;
+  border:
+    1.6px solid currentColor;
+
   border-radius: 4px;
 }
+
 
 .image-icon::before {
   content: "";
@@ -426,9 +525,12 @@ main {
   top: 4px;
   right: 4px;
 
-  border: 1.4px solid currentColor;
+  border:
+    1.4px solid currentColor;
+
   border-radius: 50%;
 }
+
 
 .image-icon::after {
   content: "";
@@ -441,85 +543,219 @@ main {
   bottom: 4px;
   left: 4px;
 
-  border-left: 1.6px solid currentColor;
-  border-bottom: 1.6px solid currentColor;
+  border-left:
+    1.6px solid currentColor;
 
-  transform: skewY(-34deg);
+  border-bottom:
+    1.6px solid currentColor;
+
+  transform:
+    skewY(-34deg);
 }
 
-/* ---------------- FILE READY ---------------- */
 
-.selected-file {
-  margin-top: 8px;
+/* ---------- MULTI FILE PREVIEW ---------- */
 
-  padding: 8px 9px;
+.selected-files-area {
+  width: 100%;
 
+  margin:
+    11px 0 0;
+
+  padding: 10px;
+
+  border:
+    1px solid
+    rgba(154, 112, 51, 0.42);
+
+  border-radius: 13px;
+
+  background:
+    rgba(255, 250, 239, 0.62);
+}
+
+
+.selected-files-header {
   display: flex;
 
-  justify-content: center;
   align-items: center;
+  justify-content: center;
 
   gap: 7px;
 
-  border-radius: 9px;
+  margin-bottom: 9px;
 
-  border: 1px solid rgba(156, 115, 53, 0.44);
-
-  background: rgba(255, 250, 238, 0.61);
+  color: var(--burgundy);
 }
 
-.selected-check {
-  width: 22px;
-  height: 22px;
 
-  display: flex;
+.selected-files-header strong {
+  font-size: 15px;
+  font-weight: 500;
+}
+
+
+.selected-files-header span {
+  min-width: 24px;
+  height: 24px;
+
+  display:
+    inline-flex;
 
   align-items: center;
   justify-content: center;
 
   border-radius: 50%;
 
-  background: var(--burgundy);
+  background:
+    var(--burgundy);
 
   color: white;
 
   font-size: 12px;
 }
 
-.selected-file strong {
-  display: block;
 
-  font-size: 12px;
+.selected-files-grid {
+  display: grid;
 
-  color: var(--burgundy);
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
+  gap: 7px;
+
+  width: 100%;
 }
 
-.selected-file span {
-  display: block;
 
-  max-width: 220px;
+.file-preview {
+  position: relative;
+
+  min-width: 0;
+
+  aspect-ratio: 1 / 1;
 
   overflow: hidden;
 
-  white-space: nowrap;
-  text-overflow: ellipsis;
+  border-radius: 10px;
 
-  direction: ltr;
+  background:
+    rgba(87, 55, 38, 0.10);
 
-  font-size: 9px;
-
-  color: var(--muted);
+  border:
+    1px solid
+    rgba(144, 102, 43, 0.32);
 }
 
-/* ---------------- UPLOAD BUTTON ---------------- */
+
+.file-preview img,
+.file-preview video {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+}
+
+
+.file-preview video {
+  background: #201a17;
+}
+
+
+.file-remove {
+  position: absolute;
+
+  top: 4px;
+  right: 4px;
+
+  width: 27px;
+  height: 27px;
+
+  padding: 0;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border: 0;
+  border-radius: 50%;
+
+  background:
+    rgba(91, 22, 31, 0.94);
+
+  color: white;
+
+  font-family:
+    Arial,
+    sans-serif;
+
+  font-size: 18px;
+  line-height: 1;
+
+  cursor: pointer;
+}
+
+
+.file-type {
+  position: absolute;
+
+  left: 4px;
+  bottom: 4px;
+
+  padding:
+    2px 5px;
+
+  border-radius: 5px;
+
+  background:
+    rgba(55, 34, 25, 0.78);
+
+  color: white;
+
+  font-size: 9px;
+}
+
+
+.add-more-text {
+  margin-top: 10px;
+
+  padding-top: 8px;
+
+  border-top:
+    1px solid
+    rgba(155, 112, 48, 0.25);
+
+  text-align: center;
+
+  font-size: 13px;
+  font-weight: 500;
+
+  color: #765225;
+}
+
+
+/* ---------- FINAL UPLOAD ---------- */
 
 .final-upload {
+  display: block;
+
   width: 100%;
-  height: 41px;
 
-  margin-top: 8px;
+  min-height: 44px;
 
-  border: 1px solid var(--gold-light);
+  margin:
+    10px 0 0;
+
+  padding:
+    9px 12px;
+
+  border:
+    1px solid
+    var(--gold-light);
+
   border-radius: 10px;
 
   background:
@@ -531,22 +767,28 @@ main {
 
   color: #fff8e8;
 
-  font-family: "Heebo", sans-serif;
+  font-family:
+    "Heebo",
+    sans-serif;
 
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 500;
 
   cursor: pointer;
 }
 
-/* ---------------- LOADING ---------------- */
+
+/* ---------- LOADING ---------- */
 
 .loading-box {
-  margin-top: 8px;
+  width: 100%;
 
-  padding: 10px;
+  margin:
+    10px 0 0;
 
-  min-height: 65px;
+  padding: 11px;
+
+  min-height: 70px;
 
   display: flex;
 
@@ -563,57 +805,78 @@ main {
   color: #fff7e9;
 }
 
-.loading-box strong {
-  margin-top: 4px;
 
-  font-size: 13px;
+.loading-box strong {
+  margin-top: 5px;
+
+  font-size: 14px;
 
   font-weight: 500;
 }
 
+
 .loading-box span {
-  font-size: 9px;
+  font-size: 10px;
 
   opacity: 0.82;
 }
 
+
 .loader {
-  width: 20px;
-  height: 20px;
+  width: 21px;
+  height: 21px;
 
   border-radius: 50%;
 
-  border: 2px solid rgba(255, 255, 255, 0.25);
-  border-top-color: #fff5dd;
+  border:
+    2px solid
+    rgba(255, 255, 255, 0.25);
 
-  animation: spin 0.8s linear infinite;
+  border-top-color:
+    #fff5dd;
+
+  animation:
+    spin 0.8s
+    linear infinite;
 }
+
 
 @keyframes spin {
   to {
-    transform: rotate(360deg);
+    transform:
+      rotate(360deg);
   }
 }
 
+
 .status-text {
-  margin: 4px 0 0;
+  margin:
+    6px 0 0;
 
-  min-height: 0;
-
-  font-size: 11px;
+  font-size: 12px;
 
   color: var(--burgundy);
 }
 
-/* ---------------- WHATSAPP ---------------- */
+
+/* ---------- WHATSAPP ---------- */
 
 .whatsapp {
-  margin-top: 10px;
-  padding-top: 8px;
+  position: static;
+
+  width: 100%;
+
+  margin:
+    12px 0 0;
+
+  padding:
+    10px 0 0;
 
   border-top:
-    1px solid rgba(162, 122, 50, 0.34);
+    1px solid
+    rgba(162, 122, 50, 0.34);
 }
+
 
 .whatsapp-title {
   margin-bottom: 7px;
@@ -621,21 +884,25 @@ main {
   font-size: 15px;
   font-weight: 500;
 
-  color: var(--burgundy-dark);
+  color:
+    var(--burgundy-dark);
 }
+
 
 .whatsapp-buttons {
   display: grid;
 
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns:
+    1fr 1fr;
 
   gap: 7px;
 }
 
-.whatsapp-buttons a {
-  min-height: 46px;
 
-  padding: 5px;
+.whatsapp-buttons a {
+  min-height: 48px;
+
+  padding: 6px;
 
   display: flex;
 
@@ -647,20 +914,24 @@ main {
   text-decoration: none;
 
   border:
-    1px solid rgba(153, 111, 48, 0.50);
+    1px solid
+    rgba(153, 111, 48, 0.50);
 
   border-radius: 9px;
 
   background:
     rgba(255, 249, 237, 0.58);
 
-  color: var(--burgundy-dark);
+  color:
+    var(--burgundy-dark);
 }
+
 
 .whatsapp-buttons a strong {
   font-size: 15px;
   font-weight: 500;
 }
+
 
 .whatsapp-buttons a span {
   margin-top: 2px;
@@ -672,17 +943,21 @@ main {
   color: #7e6237;
 }
 
-/* ---------------- SUCCESS ---------------- */
+
+/* ---------- SUCCESS ---------- */
 
 .success-card {
-  padding: 30px 18px;
+  padding:
+    30px 18px;
 }
 
-.success-mark {
-  width: 42px;
-  height: 42px;
 
-  margin: 0 auto 8px;
+.success-mark {
+  width: 44px;
+  height: 44px;
+
+  margin:
+    0 auto 10px;
 
   display: flex;
 
@@ -691,17 +966,22 @@ main {
 
   border-radius: 50%;
 
-  background: var(--burgundy);
+  background:
+    var(--burgundy);
 
   color: white;
 
-  font-size: 21px;
+  font-size: 22px;
 }
 
-.success-card h2 {
-  margin: 4px 0 8px;
 
-  font-family: "Heebo", sans-serif;
+.success-card h2 {
+  margin:
+    4px 0 8px;
+
+  font-family:
+    "Heebo",
+    sans-serif;
 
   font-size: 30px;
 
@@ -709,90 +989,54 @@ main {
 
   font-weight: 500;
 
-  color: var(--burgundy);
+  color:
+    var(--burgundy);
 }
+
 
 .success-card p {
   margin: 0;
 
-  font-family: "Heebo", sans-serif;
+  font-family:
+    "Heebo",
+    sans-serif;
 
   font-size: 17px;
+
   line-height: 1.4;
 
   font-weight: 400;
 }
 
+
 .success-names {
   margin-top: 14px;
 
-  font-family: "Cormorant Garamond", serif;
+  font-family:
+    "Cormorant Garamond",
+    serif;
 
   font-size: 36px;
 
   color: var(--gold);
-
-  letter-spacing: 0.03em;
 }
+
 
 .hidden {
-  display: none !important;
+  display:
+    none !important;
 }
 
-/* ---------------- MOBILE ---------------- */
 
-@media (max-width: 600px) {
+/* ---------- VERY NARROW PHONES ---------- */
 
-  /*
-    Allow scrolling again.
-    Important when selected file / loading adds height.
-  */
-  body {
-    background-position: 50% 34%;
-    background-attachment: scroll;
-  }
-
-  .page {
-    min-height: 100dvh;
-    overflow: visible;
-  }
-
-  .hero {
-    margin-bottom: 11px;
-  }
-
-  .mission-card {
-    padding-left: 13px;
-    padding-right: 13px;
-  }
-
-}
-
-/* short screens */
-@media (max-height: 720px) {
-
-  .hero h1 {
-    font-size: 47px;
-  }
-
-  .date {
-    font-size: 37px;
-  }
-
-  .mission-number {
-    font-size: 63px;
-  }
-
-  .mission-text {
-    margin-top: 20px;
-    font-size: 18px;
-  }
-
-}
 @media (max-width: 380px) {
+
   .hero h1 {
     font-size: 47px;
-    letter-spacing: -0.01em;
+
+    letter-spacing:
+      -0.01em;
   }
 
   .date {
@@ -801,156 +1045,40 @@ main {
 
   .small-title {
     font-size: 15px;
-    letter-spacing: 0.27em;
+
+    letter-spacing:
+      0.27em;
   }
+
 }
 
-/* ---------- MULTIPLE FILE PREVIEW ---------- */
 
-.selected-files-area {
-  margin-top: 10px;
-  padding: 10px;
+/* ---------- MOBILE ---------- */
 
-  border: 1px solid rgba(154, 112, 51, 0.42);
-  border-radius: 13px;
+@media (max-width: 600px) {
 
-  background: rgba(255, 250, 239, 0.58);
-}
+  body {
+    background-position:
+      50% 34%;
 
-.selected-files-header {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 7px;
+    background-attachment:
+      scroll;
+  }
 
-  margin-bottom: 8px;
+  .page {
+    min-height: 100vh;
 
-  color: var(--burgundy);
-}
+    height: auto;
 
-.selected-files-header strong {
-  font-size: 14px;
-  font-weight: 500;
-}
+    overflow: visible;
+  }
 
-.selected-files-header span {
-  min-width: 23px;
-  height: 23px;
+  .mission-card {
+    height: auto;
 
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+    max-height: none;
 
-  border-radius: 50%;
+    overflow: visible;
+  }
 
-  background: var(--burgundy);
-  color: white;
-
-  font-size: 11px;
-}
-
-.selected-files-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-
-  gap: 7px;
-}
-
-.file-preview {
-  position: relative;
-
-  aspect-ratio: 1 / 1;
-
-  overflow: hidden;
-
-  border-radius: 10px;
-
-  background: rgba(87, 55, 38, 0.10);
-
-  border: 1px solid rgba(144, 102, 43, 0.32);
-}
-
-.file-preview img,
-.file-preview video {
-  width: 100%;
-  height: 100%;
-
-  display: block;
-
-  object-fit: cover;
-}
-
-.file-preview video {
-  background: #201a17;
-}
-
-/* delete button */
-
-.file-remove {
-  position: absolute;
-
-  top: 4px;
-  right: 4px;
-
-  width: 25px;
-  height: 25px;
-
-  padding: 0;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  border: 0;
-  border-radius: 50%;
-
-  background: rgba(91, 22, 31, 0.92);
-
-  color: white;
-
-  font-family: Arial, sans-serif;
-  font-size: 17px;
-  line-height: 1;
-
-  cursor: pointer;
-
-  box-shadow: 0 2px 5px rgba(0,0,0,0.18);
-}
-
-/* small video marker */
-
-.file-type {
-  position: absolute;
-
-  left: 4px;
-  bottom: 4px;
-
-  padding: 2px 5px;
-
-  border-radius: 5px;
-
-  background: rgba(55, 34, 25, 0.76);
-
-  color: white;
-
-  font-size: 9px;
-}
-
-.add-more-text {
-  margin-top: 9px;
-
-  padding-top: 7px;
-
-  border-top: 1px solid rgba(155, 112, 48, 0.25);
-
-  text-align: center;
-
-  font-size: 13px;
-  font-weight: 500;
-
-  color: #765225;
-}
-
-.final-upload {
-  margin-top: 9px;
 }
