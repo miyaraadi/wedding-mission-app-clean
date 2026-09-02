@@ -1,35 +1,100 @@
 (function () {
-  const params = new URLSearchParams(window.location.search);
-  const missionId = params.get('mission');
+  const params =
+    new URLSearchParams(
+      window.location.search
+    );
 
-  const missionNumberEl = document.getElementById('missionNumber');
-  const missionTextEl = document.getElementById('missionText');
-  const statusEl = document.getElementById('statusText');
+  const missionId =
+    params.get('mission');
 
-  const missionView = document.getElementById('missionView');
-  const successView = document.getElementById('successView');
+  const missionNumberEl =
+    document.getElementById(
+      'missionNumber'
+    );
 
-  const captureInput = document.getElementById('captureInput');
-  const chooseInput = document.getElementById('chooseInput');
+  const missionTextEl =
+    document.getElementById(
+      'missionText'
+    );
 
-  const guestNameInput = document.getElementById('guestName');
+  const statusEl =
+    document.getElementById(
+      'statusText'
+    );
 
-  const selectedFileBox = document.getElementById('selectedFileBox');
-  const selectedFilesGrid = document.getElementById('selectedFilesGrid');
-  const selectedFilesCount = document.getElementById('selectedFilesCount');
+  const missionView =
+    document.getElementById(
+      'missionView'
+    );
 
-  const uploadButton = document.getElementById('uploadButton');
-  const loadingBox = document.getElementById('loadingBox');
+  const successView =
+    document.getElementById(
+      'successView'
+    );
 
-  const whatsappAdi = document.getElementById('whatsappAdi');
-  const whatsappNitay = document.getElementById('whatsappNitay');
+  const captureInput =
+    document.getElementById(
+      'captureInput'
+    );
 
-  const ADI_PHONE = '972543330598';
-  const NITAY_PHONE = '972523357812';
+  const chooseInput =
+    document.getElementById(
+      'chooseInput'
+    );
+
+  const guestNameInput =
+    document.getElementById(
+      'guestName'
+    );
+
+  const selectedFileBox =
+    document.getElementById(
+      'selectedFileBox'
+    );
+
+  const selectedFilesGrid =
+    document.getElementById(
+      'selectedFilesGrid'
+    );
+
+  const selectedFilesCount =
+    document.getElementById(
+      'selectedFilesCount'
+    );
+
+  const uploadButton =
+    document.getElementById(
+      'uploadButton'
+    );
+
+  const loadingBox =
+    document.getElementById(
+      'loadingBox'
+    );
+
+  const whatsappAdi =
+    document.getElementById(
+      'whatsappAdi'
+    );
+
+  const whatsappNitay =
+    document.getElementById(
+      'whatsappNitay'
+    );
+
+
+  const ADI_PHONE =
+    '972543330598';
+
+  const NITAY_PHONE =
+    '972523357812';
+
 
   let selectedFiles = [];
 
+
   if (!missionId) {
+
     missionNumberEl.textContent = '';
 
     missionTextEl.textContent =
@@ -38,17 +103,36 @@
     return;
   }
 
-  missionNumberEl.textContent = `#${missionId}`;
 
-  fetch(`/api/mission/${encodeURIComponent(missionId)}`)
-    .then((r) => {
-      if (!r.ok) throw new Error('not found');
-      return r.json();
+  missionNumberEl.textContent =
+    `#${missionId}`;
+
+
+  fetch(
+    `/api/mission/${encodeURIComponent(
+      missionId
+    )}`
+  )
+
+    .then((response) => {
+
+      if (!response.ok) {
+        throw new Error(
+          'Mission not found'
+        );
+      }
+
+      return response.json();
     })
+
     .then((data) => {
-      missionTextEl.textContent = data.mission_title;
+
+      missionTextEl.textContent =
+        data.mission_title;
     })
+
     .catch(() => {
+
       missionTextEl.textContent =
         'המשימה לא נמצאה. בדקו את הקישור ונסו שוב.';
     });
@@ -57,86 +141,142 @@
   /* ---------- NAME ---------- */
 
   function getGuestName() {
-    return guestNameInput.value.trim();
+
+    return guestNameInput
+      .value
+      .trim();
   }
 
 
   /* ---------- WHATSAPP ---------- */
 
   function createWhatsappMessage() {
+
     let message =
       `היי ❤️ לא הצלחתי להעלות דרך האתר.\n` +
       `אני שולח/ת כאן את התמונות או הסרטונים של משימה #${missionId}.`;
 
-    const name = getGuestName();
+    const name =
+      getGuestName();
 
     if (name) {
-      message += `\nהשם שלי: ${name}`;
+
+      message +=
+        `\nהשם שלי: ${name}`;
     }
 
     return message;
   }
 
+
   function createWhatsappLink(phone) {
-    return `https://wa.me/${phone}?text=${encodeURIComponent(
-      createWhatsappMessage()
-    )}`;
-  }
 
-  function updateWhatsappLinks() {
-    whatsappAdi.href = createWhatsappLink(ADI_PHONE);
-    whatsappNitay.href = createWhatsappLink(NITAY_PHONE);
-  }
-
-  updateWhatsappLinks();
-
-  guestNameInput.addEventListener('input', updateWhatsappLinks);
-
-  whatsappAdi.addEventListener('click', updateWhatsappLinks);
-  whatsappNitay.addEventListener('click', updateWhatsappLinks);
-
-
-  /* ---------- FILES ---------- */
-
-  function isSameFile(a, b) {
     return (
-      a.name === b.name &&
-      a.size === b.size &&
-      a.lastModified === b.lastModified
+      `https://wa.me/${phone}` +
+      `?text=${encodeURIComponent(
+        createWhatsappMessage()
+      )}`
     );
   }
 
-  function addFiles(fileList) {
-    const newFiles = Array.from(fileList || []);
 
-    if (!newFiles.length) return;
+  function updateWhatsappLinks() {
 
-    newFiles.forEach((file) => {
-      const alreadyExists = selectedFiles.some((existingFile) =>
-        isSameFile(existingFile, file)
+    whatsappAdi.href =
+      createWhatsappLink(
+        ADI_PHONE
       );
 
-      if (!alreadyExists) {
+    whatsappNitay.href =
+      createWhatsappLink(
+        NITAY_PHONE
+      );
+  }
+
+
+  updateWhatsappLinks();
+
+
+  guestNameInput
+    .addEventListener(
+      'input',
+      updateWhatsappLinks
+    );
+
+
+  whatsappAdi
+    .addEventListener(
+      'click',
+      updateWhatsappLinks
+    );
+
+
+  whatsappNitay
+    .addEventListener(
+      'click',
+      updateWhatsappLinks
+    );
+
+
+  /* ---------- FILE HELPERS ---------- */
+
+  function isSameFile(a, b) {
+
+    return (
+      a.name === b.name &&
+      a.size === b.size &&
+      a.lastModified ===
+        b.lastModified
+    );
+  }
+
+
+  function addFiles(fileList) {
+
+    const newFiles =
+      Array.from(
+        fileList || []
+      );
+
+
+    if (!newFiles.length) {
+      return;
+    }
+
+
+    newFiles.forEach((file) => {
+
+      const exists =
+        selectedFiles.some(
+          (existingFile) =>
+            isSameFile(
+              existingFile,
+              file
+            )
+        );
+
+
+      if (!exists) {
         selectedFiles.push(file);
       }
     });
 
-    /*
-      Important:
-      clear the input so the guest can choose
-      another photo immediately afterwards.
-    */
+
     captureInput.value = '';
     chooseInput.value = '';
+
 
     renderSelectedFiles();
   }
 
 
-  /* ---------- REMOVE FILE ---------- */
-
   function removeFile(index) {
-    selectedFiles.splice(index, 1);
+
+    selectedFiles.splice(
+      index,
+      1
+    );
+
     renderSelectedFiles();
   }
 
@@ -144,238 +284,461 @@
   /* ---------- PREVIEW ---------- */
 
   function renderSelectedFiles() {
-    selectedFilesGrid.innerHTML = '';
 
-    if (selectedFiles.length === 0) {
-      selectedFileBox.classList.add('hidden');
-      uploadButton.classList.add('hidden');
+    selectedFilesGrid
+      .innerHTML = '';
 
-      selectedFilesCount.textContent = '';
+
+    if (
+      selectedFiles.length === 0
+    ) {
+
+      selectedFileBox
+        .classList
+        .add('hidden');
+
+      uploadButton
+        .classList
+        .add('hidden');
+
+      selectedFilesCount
+        .textContent = '0';
 
       return;
     }
 
-    selectedFileBox.classList.remove('hidden');
-    uploadButton.classList.remove('hidden');
 
-    selectedFilesCount.textContent = selectedFiles.length;
-
-    selectedFiles.forEach((file, index) => {
-
-      const preview = document.createElement('div');
-
-      preview.className = 'file-preview';
+    selectedFileBox
+      .classList
+      .remove('hidden');
 
 
-      /* IMAGE */
-
-      if (file.type.startsWith('image/')) {
-
-        const image = document.createElement('img');
-
-        const objectUrl = URL.createObjectURL(file);
-
-        image.src = objectUrl;
-        image.alt = file.name;
-
-        image.addEventListener('load', () => {
-          URL.revokeObjectURL(objectUrl);
-        });
-
-        preview.appendChild(image);
-      }
+    uploadButton
+      .classList
+      .remove('hidden');
 
 
-      /* VIDEO */
-
-      else if (file.type.startsWith('video/')) {
-
-        const video = document.createElement('video');
-
-        const objectUrl = URL.createObjectURL(file);
-
-        video.src = objectUrl;
-
-        video.controls = true;
-        video.preload = 'metadata';
-
-        preview.appendChild(video);
-
-        const typeLabel = document.createElement('div');
-
-        typeLabel.className = 'file-type';
-        typeLabel.textContent = 'וידאו';
-
-        preview.appendChild(typeLabel);
-
-        video.addEventListener('loadedmetadata', () => {
-          URL.revokeObjectURL(objectUrl);
-        });
-      }
+    selectedFilesCount
+      .textContent =
+        selectedFiles.length;
 
 
-      /* DELETE */
+    selectedFiles
+      .forEach(
+        (file, index) => {
 
-      const removeButton = document.createElement('button');
+          const preview =
+            document
+              .createElement(
+                'div'
+              );
 
-      removeButton.type = 'button';
-      removeButton.className = 'file-remove';
+          preview.className =
+            'file-preview';
 
-      removeButton.textContent = '×';
-      removeButton.setAttribute(
-        'aria-label',
-        `הסרת ${file.name}`
+
+          if (
+            file.type
+              .startsWith(
+                'image/'
+              )
+          ) {
+
+            const image =
+              document
+                .createElement(
+                  'img'
+                );
+
+
+            const objectUrl =
+              URL
+                .createObjectURL(
+                  file
+                );
+
+
+            image.src =
+              objectUrl;
+
+            image.alt =
+              file.name;
+
+
+            image.onload =
+              () => {
+
+                URL
+                  .revokeObjectURL(
+                    objectUrl
+                  );
+              };
+
+
+            preview
+              .appendChild(
+                image
+              );
+          }
+
+
+          else if (
+            file.type
+              .startsWith(
+                'video/'
+              )
+          ) {
+
+            const video =
+              document
+                .createElement(
+                  'video'
+                );
+
+
+            const objectUrl =
+              URL
+                .createObjectURL(
+                  file
+                );
+
+
+            video.src =
+              objectUrl;
+
+            video.controls =
+              true;
+
+            video.preload =
+              'metadata';
+
+            video.playsInline =
+              true;
+
+
+            preview
+              .appendChild(
+                video
+              );
+
+
+            const typeLabel =
+              document
+                .createElement(
+                  'div'
+                );
+
+
+            typeLabel.className =
+              'file-type';
+
+            typeLabel.textContent =
+              'וידאו';
+
+
+            preview
+              .appendChild(
+                typeLabel
+              );
+          }
+
+
+          const removeButton =
+            document
+              .createElement(
+                'button'
+              );
+
+
+          removeButton.type =
+            'button';
+
+          removeButton.className =
+            'file-remove';
+
+          removeButton.textContent =
+            '×';
+
+
+          removeButton
+            .setAttribute(
+              'aria-label',
+              `הסרת ${file.name}`
+            );
+
+
+          removeButton
+            .addEventListener(
+              'click',
+              () => {
+
+                removeFile(
+                  index
+                );
+              }
+            );
+
+
+          preview
+            .appendChild(
+              removeButton
+            );
+
+
+          selectedFilesGrid
+            .appendChild(
+              preview
+            );
+        }
       );
 
-      removeButton.addEventListener('click', () => {
-        removeFile(index);
-      });
 
-      preview.appendChild(removeButton);
+    if (
+      selectedFiles.length === 1
+    ) {
 
-      selectedFilesGrid.appendChild(preview);
-    });
-
-
-    /* UPLOAD BUTTON TEXT */
-
-    if (selectedFiles.length === 1) {
       uploadButton.textContent =
         'העלאת הקובץ';
-    } else {
+    }
+
+    else {
+
       uploadButton.textContent =
         `העלאת ${selectedFiles.length} קבצים`;
     }
+
 
     statusEl.textContent = '';
   }
 
 
-  /* ---------- FILE INPUT EVENTS ---------- */
+  /* ---------- INPUTS ---------- */
 
-  captureInput.addEventListener('change', (e) => {
-    addFiles(e.target.files);
-  });
+  captureInput
+    .addEventListener(
+      'change',
+      (event) => {
 
-  chooseInput.addEventListener('change', (e) => {
-    addFiles(e.target.files);
-  });
+        addFiles(
+          event.target.files
+        );
+      }
+    );
+
+
+  chooseInput
+    .addEventListener(
+      'change',
+      (event) => {
+
+        addFiles(
+          event.target.files
+        );
+      }
+    );
 
 
   /* ---------- UPLOAD ---------- */
 
-  uploadButton.addEventListener('click', async () => {
+  uploadButton
+    .addEventListener(
+      'click',
+      async () => {
 
-    if (!selectedFiles.length) {
-      statusEl.textContent =
-        'בחרו קודם תמונה או סרטון.';
+        if (
+          selectedFiles.length === 0
+        ) {
 
-      return;
-    }
+          statusEl.textContent =
+            'בחרו קודם תמונה או סרטון.';
 
-    uploadButton.classList.add('hidden');
-    selectedFileBox.classList.add('hidden');
-
-    loadingBox.classList.remove('hidden');
-
-    captureInput.disabled = true;
-    chooseInput.disabled = true;
-    guestNameInput.disabled = true;
-
-    statusEl.textContent = '';
-
-    const guestName = getGuestName();
-
-    try {
-
-      for (let i = 0; i < selectedFiles.length; i++) {
-
-        const file = selectedFiles[i];
-
-        const strongEl =
-          loadingBox.querySelector('strong');
-
-        const spanEl =
-          loadingBox.querySelector('span');
-
-        if (strongEl) {
-
-          if (selectedFiles.length === 1) {
-            strongEl.textContent =
-              'מעלים את הזיכרון שלכם…';
-          }
-
-          else {
-            strongEl.textContent =
-              `מעלים קובץ ${i + 1} מתוך ${selectedFiles.length}…`;
-          }
+          return;
         }
 
-        if (spanEl) {
-          spanEl.textContent =
-            'אל תסגרו את החלון';
-        }
 
-        const formData = new FormData();
+        uploadButton
+          .classList
+          .add('hidden');
 
-        formData.append('file', file);
-        formData.append('mission_id', missionId);
 
-        if (guestName) {
-          formData.append(
-            'uploader_name',
-            guestName
-          );
-        }
+        loadingBox
+          .classList
+          .remove('hidden');
 
-        const res = await fetch('/api/upload', {
-          method: 'POST',
-          body: formData,
-        });
 
-        let data = {};
+        captureInput.disabled =
+          true;
+
+        chooseInput.disabled =
+          true;
+
+        guestNameInput.disabled =
+          true;
+
+
+        statusEl.textContent = '';
+
+
+        const guestName =
+          getGuestName();
+
 
         try {
-          data = await res.json();
-        } catch (_) {}
 
-        if (!res.ok || !data.success) {
+          for (
+            let i = 0;
+            i < selectedFiles.length;
+            i++
+          ) {
 
-          throw new Error(
-            data.message ||
-            `העלאת קובץ ${i + 1} נכשלה.`
-          );
+            const file =
+              selectedFiles[i];
+
+
+            const strongEl =
+              loadingBox
+                .querySelector(
+                  'strong'
+                );
+
+
+            const spanEl =
+              loadingBox
+                .querySelector(
+                  'span'
+                );
+
+
+            if (strongEl) {
+
+              if (
+                selectedFiles.length === 1
+              ) {
+
+                strongEl.textContent =
+                  'מעלים את הזיכרון שלכם…';
+              }
+
+              else {
+
+                strongEl.textContent =
+                  `מעלים קובץ ${i + 1} מתוך ${selectedFiles.length}…`;
+              }
+            }
+
+
+            if (spanEl) {
+
+              spanEl.textContent =
+                'אל תסגרו את החלון';
+            }
+
+
+            const formData =
+              new FormData();
+
+
+            formData.append(
+              'file',
+              file
+            );
+
+
+            formData.append(
+              'mission_id',
+              missionId
+            );
+
+
+            if (guestName) {
+
+              formData.append(
+                'uploader_name',
+                guestName
+              );
+            }
+
+
+            const response =
+              await fetch(
+                '/api/upload',
+                {
+                  method: 'POST',
+                  body: formData
+                }
+              );
+
+
+            let data = {};
+
+
+            try {
+
+              data =
+                await response
+                  .json();
+            }
+
+            catch (_) {}
+
+
+            if (
+              !response.ok ||
+              !data.success
+            ) {
+
+              throw new Error(
+                data.message ||
+                `העלאת קובץ ${i + 1} נכשלה.`
+              );
+            }
+          }
+
+
+          missionView
+            .classList
+            .add('hidden');
+
+
+          successView
+            .classList
+            .remove('hidden');
+
+
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          });
+        }
+
+
+        catch (error) {
+
+          loadingBox
+            .classList
+            .add('hidden');
+
+
+          uploadButton
+            .classList
+            .remove('hidden');
+
+
+          captureInput.disabled =
+            false;
+
+          chooseInput.disabled =
+            false;
+
+          guestNameInput.disabled =
+            false;
+
+
+          statusEl.textContent =
+            error.message ||
+            'ההעלאה נכשלה. אפשר גם לשלוח לנו בוואטסאפ.';
         }
       }
-
-
-      /* ---------- SUCCESS ---------- */
-
-      missionView.classList.add('hidden');
-      successView.classList.remove('hidden');
-
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth',
-      });
-
-    }
-
-    catch (err) {
-
-      loadingBox.classList.add('hidden');
-
-      selectedFileBox.classList.remove('hidden');
-      uploadButton.classList.remove('hidden');
-
-      captureInput.disabled = false;
-      chooseInput.disabled = false;
-      guestNameInput.disabled = false;
-
-      statusEl.textContent =
-        err.message ||
-        'ההעלאה נכשלה. אפשר גם לשלוח לנו בוואטסאפ.';
-    }
-  });
+    );
 
 })();
