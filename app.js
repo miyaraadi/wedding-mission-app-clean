@@ -15,10 +15,10 @@
   const guestNameInput = document.getElementById('guestName');
 
   const selectedFileBox = document.getElementById('selectedFileBox');
-  const selectedFileName = document.getElementById('selectedFileName');
+  const selectedFilesGrid = document.getElementById('selectedFilesGrid');
+  const selectedFilesCount = document.getElementById('selectedFilesCount');
 
   const uploadButton = document.getElementById('uploadButton');
-
   const loadingBox = document.getElementById('loadingBox');
 
   const whatsappAdi = document.getElementById('whatsappAdi');
@@ -31,8 +31,10 @@
 
   if (!missionId) {
     missionNumberEl.textContent = '';
+
     missionTextEl.textContent =
       'לא נמצא קוד משימה. אנא סרקו שוב את קוד ה-QR שעל הכרטיס.';
+
     return;
   }
 
@@ -51,9 +53,15 @@
         'המשימה לא נמצאה. בדקו את הקישור ונסו שוב.';
     });
 
+
+  /* ---------- NAME ---------- */
+
   function getGuestName() {
     return guestNameInput.value.trim();
   }
+
+
+  /* ---------- WHATSAPP ---------- */
 
   function createWhatsappMessage() {
     let message =
@@ -87,6 +95,9 @@
   whatsappAdi.addEventListener('click', updateWhatsappLinks);
   whatsappNitay.addEventListener('click', updateWhatsappLinks);
 
+
+  /* ---------- FILES ---------- */
+
   function isSameFile(a, b) {
     return (
       a.name === b.name &&
@@ -110,35 +121,137 @@
       }
     });
 
-    updateSelectedFilesUI();
-
+    /*
+      Important:
+      clear the input so the guest can choose
+      another photo immediately afterwards.
+    */
     captureInput.value = '';
     chooseInput.value = '';
+
+    renderSelectedFiles();
   }
 
-  function updateSelectedFilesUI() {
+
+  /* ---------- REMOVE FILE ---------- */
+
+  function removeFile(index) {
+    selectedFiles.splice(index, 1);
+    renderSelectedFiles();
+  }
+
+
+  /* ---------- PREVIEW ---------- */
+
+  function renderSelectedFiles() {
+    selectedFilesGrid.innerHTML = '';
+
     if (selectedFiles.length === 0) {
       selectedFileBox.classList.add('hidden');
       uploadButton.classList.add('hidden');
-      selectedFileName.textContent = '';
+
+      selectedFilesCount.textContent = '';
+
       return;
     }
 
     selectedFileBox.classList.remove('hidden');
     uploadButton.classList.remove('hidden');
 
+    selectedFilesCount.textContent = selectedFiles.length;
+
+    selectedFiles.forEach((file, index) => {
+
+      const preview = document.createElement('div');
+
+      preview.className = 'file-preview';
+
+
+      /* IMAGE */
+
+      if (file.type.startsWith('image/')) {
+
+        const image = document.createElement('img');
+
+        const objectUrl = URL.createObjectURL(file);
+
+        image.src = objectUrl;
+        image.alt = file.name;
+
+        image.addEventListener('load', () => {
+          URL.revokeObjectURL(objectUrl);
+        });
+
+        preview.appendChild(image);
+      }
+
+
+      /* VIDEO */
+
+      else if (file.type.startsWith('video/')) {
+
+        const video = document.createElement('video');
+
+        const objectUrl = URL.createObjectURL(file);
+
+        video.src = objectUrl;
+
+        video.controls = true;
+        video.preload = 'metadata';
+
+        preview.appendChild(video);
+
+        const typeLabel = document.createElement('div');
+
+        typeLabel.className = 'file-type';
+        typeLabel.textContent = 'וידאו';
+
+        preview.appendChild(typeLabel);
+
+        video.addEventListener('loadedmetadata', () => {
+          URL.revokeObjectURL(objectUrl);
+        });
+      }
+
+
+      /* DELETE */
+
+      const removeButton = document.createElement('button');
+
+      removeButton.type = 'button';
+      removeButton.className = 'file-remove';
+
+      removeButton.textContent = '×';
+      removeButton.setAttribute(
+        'aria-label',
+        `הסרת ${file.name}`
+      );
+
+      removeButton.addEventListener('click', () => {
+        removeFile(index);
+      });
+
+      preview.appendChild(removeButton);
+
+      selectedFilesGrid.appendChild(preview);
+    });
+
+
+    /* UPLOAD BUTTON TEXT */
+
     if (selectedFiles.length === 1) {
-      selectedFileName.textContent = selectedFiles[0].name;
-      uploadButton.textContent = 'העלאת הקובץ';
+      uploadButton.textContent =
+        'העלאת הקובץ';
     } else {
-      selectedFileName.textContent =
-        `נבחרו ${selectedFiles.length} קבצים`;
       uploadButton.textContent =
         `העלאת ${selectedFiles.length} קבצים`;
     }
 
     statusEl.textContent = '';
   }
+
+
+  /* ---------- FILE INPUT EVENTS ---------- */
 
   captureInput.addEventListener('change', (e) => {
     addFiles(e.target.files);
@@ -148,10 +261,15 @@
     addFiles(e.target.files);
   });
 
+
+  /* ---------- UPLOAD ---------- */
+
   uploadButton.addEventListener('click', async () => {
+
     if (!selectedFiles.length) {
       statusEl.textContent =
         'בחרו קודם תמונה או סרטון.';
+
       return;
     }
 
@@ -169,17 +287,28 @@
     const guestName = getGuestName();
 
     try {
+
       for (let i = 0; i < selectedFiles.length; i++) {
+
         const file = selectedFiles[i];
 
-        const strongEl = loadingBox.querySelector('strong');
-        const spanEl = loadingBox.querySelector('span');
+        const strongEl =
+          loadingBox.querySelector('strong');
+
+        const spanEl =
+          loadingBox.querySelector('span');
 
         if (strongEl) {
-          strongEl.textContent =
-            selectedFiles.length === 1
-              ? 'מעלים את הזיכרון שלכם…'
-              : `מעלים קובץ ${i + 1} מתוך ${selectedFiles.length}…`;
+
+          if (selectedFiles.length === 1) {
+            strongEl.textContent =
+              'מעלים את הזיכרון שלכם…';
+          }
+
+          else {
+            strongEl.textContent =
+              `מעלים קובץ ${i + 1} מתוך ${selectedFiles.length}…`;
+          }
         }
 
         if (spanEl) {
@@ -193,7 +322,10 @@
         formData.append('mission_id', missionId);
 
         if (guestName) {
-          formData.append('uploader_name', guestName);
+          formData.append(
+            'uploader_name',
+            guestName
+          );
         }
 
         const res = await fetch('/api/upload', {
@@ -208,12 +340,16 @@
         } catch (_) {}
 
         if (!res.ok || !data.success) {
+
           throw new Error(
             data.message ||
-              `העלאת קובץ ${i + 1} נכשלה.`
+            `העלאת קובץ ${i + 1} נכשלה.`
           );
         }
       }
+
+
+      /* ---------- SUCCESS ---------- */
 
       missionView.classList.add('hidden');
       successView.classList.remove('hidden');
@@ -223,7 +359,10 @@
         behavior: 'smooth',
       });
 
-    } catch (err) {
+    }
+
+    catch (err) {
+
       loadingBox.classList.add('hidden');
 
       selectedFileBox.classList.remove('hidden');
@@ -238,4 +377,5 @@
         'ההעלאה נכשלה. אפשר גם לשלוח לנו בוואטסאפ.';
     }
   });
+
 })();
