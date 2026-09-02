@@ -283,234 +283,227 @@
 
   /* ---------- PREVIEW ---------- */
 
-  function renderSelectedFiles() {
+ function renderSelectedFiles() {
 
-    selectedFilesGrid
-      .innerHTML = '';
+  selectedFilesGrid.innerHTML = '';
+
+  const addMoreText =
+    document.querySelector('.add-more-text');
 
 
-    if (
-      selectedFiles.length === 0
-    ) {
+  /* אין קבצים */
 
-      selectedFileBox
-        .classList
-        .add('hidden');
+  if (selectedFiles.length === 0) {
 
-      uploadButton
-        .classList
-        .add('hidden');
+    selectedFileBox.classList.add('hidden');
+    uploadButton.classList.add('hidden');
 
-      selectedFilesCount
-        .textContent = '0';
+    selectedFilesCount.textContent = '0';
 
-      return;
+    selectedFilesGrid.style.maxHeight = '';
+    selectedFilesGrid.style.overflowY = '';
+
+    return;
+  }
+
+
+  /* יש קבצים */
+
+  selectedFileBox.classList.remove('hidden');
+  uploadButton.classList.remove('hidden');
+
+  selectedFilesCount.textContent =
+    selectedFiles.length;
+
+
+  /*
+    אם יש יותר מ-3 קבצים:
+    רק אזור התמונות מקבל גלילה.
+    הכרטיס כולו לא ממשיך להתארך.
+  */
+
+  if (selectedFiles.length > 3) {
+
+    selectedFilesGrid.style.maxHeight =
+      '112px';
+
+    selectedFilesGrid.style.overflowY =
+      'auto';
+
+    selectedFilesGrid.style.overflowX =
+      'hidden';
+
+    selectedFilesGrid.style.paddingRight =
+      '3px';
+
+    selectedFilesGrid.style.overscrollBehavior =
+      'contain';
+
+    selectedFilesGrid.style.webkitOverflowScrolling =
+      'touch';
+
+
+    if (addMoreText) {
+
+      addMoreText.textContent =
+        '↕ גללו לצפייה בכל הקבצים • אפשר להוסיף עוד';
     }
 
+  }
 
-    selectedFileBox
-      .classList
-      .remove('hidden');
+  else {
 
+    selectedFilesGrid.style.maxHeight =
+      '';
 
-    uploadButton
-      .classList
-      .remove('hidden');
+    selectedFilesGrid.style.overflowY =
+      'visible';
 
-
-    selectedFilesCount
-      .textContent =
-        selectedFiles.length;
+    selectedFilesGrid.style.paddingRight =
+      '';
 
 
-    selectedFiles
-      .forEach(
-        (file, index) => {
+    if (addMoreText) {
 
-          const preview =
-            document
-              .createElement(
-                'div'
-              );
-
-          preview.className =
-            'file-preview';
+      addMoreText.textContent =
+        'אפשר להוסיף עוד תמונות או סרטונים';
+    }
+  }
 
 
-          if (
-            file.type
-              .startsWith(
-                'image/'
-              )
-          ) {
+  /* יצירת התמונות והסרטונים */
 
-            const image =
-              document
-                .createElement(
-                  'img'
-                );
+  selectedFiles.forEach(
+    (file, index) => {
+
+      const preview =
+        document.createElement('div');
+
+      preview.className =
+        'file-preview';
 
 
-            const objectUrl =
-              URL
-                .createObjectURL(
-                  file
-                );
+      /* תמונה */
 
+      if (
+        file.type.startsWith('image/')
+      ) {
 
-            image.src =
-              objectUrl;
+        const image =
+          document.createElement('img');
 
-            image.alt =
-              file.name;
+        const objectUrl =
+          URL.createObjectURL(file);
 
+        image.src = objectUrl;
+        image.alt = file.name;
 
-            image.onload =
-              () => {
+        image.addEventListener(
+          'load',
+          () => {
 
-                URL
-                  .revokeObjectURL(
-                    objectUrl
-                  );
-              };
-
-
-            preview
-              .appendChild(
-                image
-              );
+            URL.revokeObjectURL(
+              objectUrl
+            );
           }
+        );
+
+        preview.appendChild(image);
+      }
 
 
-          else if (
-            file.type
-              .startsWith(
-                'video/'
-              )
-          ) {
+      /* סרטון */
 
-            const video =
-              document
-                .createElement(
-                  'video'
-                );
+      else if (
+        file.type.startsWith('video/')
+      ) {
 
+        const video =
+          document.createElement('video');
 
-            const objectUrl =
-              URL
-                .createObjectURL(
-                  file
-                );
+        const objectUrl =
+          URL.createObjectURL(file);
 
+        video.src = objectUrl;
 
-            video.src =
-              objectUrl;
+        video.controls = true;
+        video.preload = 'metadata';
+        video.playsInline = true;
 
-            video.controls =
-              true;
-
-            video.preload =
-              'metadata';
-
-            video.playsInline =
-              true;
+        preview.appendChild(video);
 
 
-            preview
-              .appendChild(
-                video
-              );
+        const typeLabel =
+          document.createElement('div');
+
+        typeLabel.className =
+          'file-type';
+
+        typeLabel.textContent =
+          'וידאו';
+
+        preview.appendChild(
+          typeLabel
+        );
+      }
 
 
-            const typeLabel =
-              document
-                .createElement(
-                  'div'
-                );
+      /* כפתור מחיקה */
 
+      const removeButton =
+        document.createElement('button');
 
-            typeLabel.className =
-              'file-type';
+      removeButton.type =
+        'button';
 
-            typeLabel.textContent =
-              'וידאו';
+      removeButton.className =
+        'file-remove';
 
+      removeButton.textContent =
+        '×';
 
-            preview
-              .appendChild(
-                typeLabel
-              );
-          }
+      removeButton.setAttribute(
+        'aria-label',
+        `הסרת ${file.name}`
+      );
 
+      removeButton.addEventListener(
+        'click',
+        () => {
 
-          const removeButton =
-            document
-              .createElement(
-                'button'
-              );
-
-
-          removeButton.type =
-            'button';
-
-          removeButton.className =
-            'file-remove';
-
-          removeButton.textContent =
-            '×';
-
-
-          removeButton
-            .setAttribute(
-              'aria-label',
-              `הסרת ${file.name}`
-            );
-
-
-          removeButton
-            .addEventListener(
-              'click',
-              () => {
-
-                removeFile(
-                  index
-                );
-              }
-            );
-
-
-          preview
-            .appendChild(
-              removeButton
-            );
-
-
-          selectedFilesGrid
-            .appendChild(
-              preview
-            );
+          removeFile(index);
         }
       );
 
+      preview.appendChild(
+        removeButton
+      );
 
-    if (
-      selectedFiles.length === 1
-    ) {
-
-      uploadButton.textContent =
-        'העלאת הקובץ';
+      selectedFilesGrid.appendChild(
+        preview
+      );
     }
-
-    else {
-
-      uploadButton.textContent =
-        `העלאת ${selectedFiles.length} קבצים`;
-    }
+  );
 
 
-    statusEl.textContent = '';
+  /* טקסט כפתור ההעלאה */
+
+  if (selectedFiles.length === 1) {
+
+    uploadButton.textContent =
+      'העלאת הקובץ';
+
   }
 
+  else {
+
+    uploadButton.textContent =
+      `העלאת ${selectedFiles.length} קבצים`;
+  }
+
+
+  statusEl.textContent = '';
+}
 
   /* ---------- INPUTS ---------- */
 
