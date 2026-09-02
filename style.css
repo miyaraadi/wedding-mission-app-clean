@@ -23,12 +23,12 @@ body {
   font-family: "Heebo", sans-serif;
   color: var(--brown);
 
-  background-image:
-    linear-gradient(
-      rgba(224, 198, 156, 0.20),
-      rgba(89, 47, 34, 0.18)
-    ),
-    url("/couple-vintage-bg.png");
+background-image:
+  linear-gradient(
+    rgba(142, 91, 51, 0.13),
+    rgba(72, 36, 27, 0.18)
+  ),
+  url("/couple-vintage-bg.png");
 
   background-size: cover;
   background-position: 50% 37%;
@@ -46,15 +46,15 @@ body::before {
 
   background:
     linear-gradient(
-      rgba(124, 84, 52, 0.08),
-      rgba(90, 51, 36, 0.10)
+      rgba(116, 70, 36, 0.18),
+      rgba(89, 46, 29, 0.20)
     );
 
   backdrop-filter:
-    sepia(0.28)
-    saturate(0.78)
-    contrast(0.93)
-    brightness(0.98);
+    sepia(0.55)
+    saturate(0.62)
+    contrast(0.92)
+    brightness(0.94);
 }
 
 .page {
@@ -118,22 +118,18 @@ body::before {
 }
 
 .date {
-  margin-top: 10px;
+  margin-top: 9px;
 
   font-family: "Playfair Display", serif;
 
-  font-size: clamp(54px, 14vw, 80px);
+  font-size: clamp(58px, 15vw, 84px);
   line-height: 1;
 
   font-weight: 600;
 
-  letter-spacing: 0.025em;
+  letter-spacing: 0.02em;
 
-  color: #b78a36;
-
-  text-shadow:
-    0 1px 0 rgba(255, 245, 213, 0.55),
-    0 3px 10px rgba(73, 47, 13, 0.12);
+  color: #9f6d1f;
 }
 
 /* ---------------- MAIN ---------------- */
@@ -162,8 +158,8 @@ main {
   background:
     linear-gradient(
       145deg,
-      rgba(252, 245, 230, 0.74),
-      rgba(246, 232, 207, 0.68)
+      rgba(252, 245, 230, 0.62),
+      rgba(246, 232, 207, 0.54)
     );
 
   border: 1px solid rgba(169, 126, 59, 0.80);
@@ -172,8 +168,7 @@ main {
     0 12px 34px rgba(47, 25, 16, 0.18),
     inset 0 0 0 4px rgba(255, 253, 246, 0.19);
 
-  backdrop-filter: blur(1px);
-}
+  backdrop-filter: blur(0.5px);}
 
 /* ---------------- MISSION HEADER ---------------- */
 
@@ -228,19 +223,32 @@ main {
 }
 
 .name-area label {
+  position: relative;
+
   display: block;
-  margin-bottom: 5px;
+
+  width: fit-content;
+
+  margin: 0 auto 5px;
 
   font-size: 16px;
   font-weight: 500;
 
   color: var(--burgundy);
 }
-
 .name-area label span {
-  margin-right: 6px;
+  position: absolute;
 
-  font-size: 13px;
+  right: 100%;
+  top: 50%;
+
+  transform: translateY(-50%);
+
+  margin-right: 7px;
+
+  white-space: nowrap;
+
+  font-size: 12px;
   font-weight: 300;
 
   color: var(--muted);
