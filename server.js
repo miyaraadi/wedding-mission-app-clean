@@ -79,6 +79,7 @@ app.post('/api/upload', upload.single('file'), async (req, res) => {
 
   try {
     const missionId = req.body.mission_id;
+    const uploaderName = String(req.body.uploader_name || '').trim().slice(0, 80);
     const missions = loadMissions();
     const missionTitle = missions[missionId];
 
@@ -95,7 +96,9 @@ app.post('/api/upload', upload.single('file'), async (req, res) => {
       mimeType: req.file.mimetype,
       missionId,
       missionTitle,
-      originalFilename: req.file.originalname,
+      originalFilename: uploaderName
+        ? `${uploaderName}__${req.file.originalname}`
+        : req.file.originalname,
       uploadTimestamp: new Date().toISOString(),
     });
 
