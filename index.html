@@ -2,13 +2,9 @@
 <html lang="he" dir="rtl">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="theme-color" content="#5b1720" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Wedding Mission — Adi & Nitay</title>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <title>Wedding Mission</title>
 
   <link
     href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Heebo:wght@300;400;500;600&family=Playfair+Display:wght@500;600;700&display=swap"
@@ -25,27 +21,25 @@
     <header class="hero">
       <div class="small-title">WEDDING MISSION</div>
 
-      <h1>
-        ADI <span>&</span> NITAY
-      </h1>
+      <h1>ADI <span>&</span> NITAY</h1>
 
-      <div class="date">
-        11.03.2027
-      </div>
+      <div class="date">11.03.2027</div>
     </header>
+
 
     <main>
 
       <section id="missionView" class="mission-card">
 
         <div class="mission-head">
-          <div class="mission-label">משימה</div>
+          <div class="mission-label">המשימה שלכם</div>
           <div id="missionNumber" class="mission-number"></div>
         </div>
 
-        <p id="missionText" class="mission-text">
-          טוען את המשימה…
-        </p>
+        <div id="missionText" class="mission-text">
+          טוענים את המשימה...
+        </div>
+
 
         <div class="name-area">
 
@@ -57,89 +51,101 @@
           <input
             id="guestName"
             type="text"
-            placeholder="אפשר להשאיר שם"
             maxlength="80"
+            placeholder="איך נדע מי שלח?"
+            autocomplete="name"
           />
 
         </div>
 
-        <div class="choose-area">
 
-          <div class="upload-title">
-            בחרו תמונה או סרטון
-          </div>
+        <div class="upload-title">
+          הוסיפו תמונה או סרטון
+        </div>
 
-          <div class="upload-buttons">
 
-            <label class="upload-btn burgundy">
+        <div class="upload-buttons">
 
-              <span class="line-icon camera-icon" aria-hidden="true"></span>
+          <label class="upload-btn burgundy">
 
-              <strong>צלמו עכשיו</strong>
+            <span class="line-icon camera-icon"></span>
 
-              <input
-                id="captureInput"
-                type="file"
-                accept="image/*,video/*"
-                capture="environment"
-                multiple
-                hidden
-              />
+            <strong>צילום עכשיו</strong>
 
-            </label>
+            <input
+              id="captureInput"
+              type="file"
+              accept="image/*,video/*"
+              capture="environment"
+              multiple
+              hidden
+            />
 
-            <label class="upload-btn gold">
+          </label>
 
-              <span class="line-icon image-icon" aria-hidden="true"></span>
 
-              <strong>בחרו מהגלריה</strong>
+          <label class="upload-btn gold">
 
-              <input
-                id="chooseInput"
-                type="file"
-                accept="image/*,video/*"
-                multiple
-                hidden
-              />
+            <span class="line-icon image-icon"></span>
 
-            </label>
+            <strong>בחירה מהגלריה</strong>
 
-          </div>
+            <input
+              id="chooseInput"
+              type="file"
+              accept="image/*,video/*"
+              multiple
+              hidden
+            />
+
+          </label>
 
         </div>
 
+
         <div id="selectedFileBox" class="selected-files-area hidden">
-        
+
           <div class="selected-files-header">
-            <strong id="selectedFilesTitle">הקבצים שבחרתם</strong>
-            <span id="selectedFilesCount"></span>
+
+            <strong>הקבצים שבחרתם</strong>
+
+            <span id="selectedFilesCount">0</span>
+
           </div>
-        
-          <div id="selectedFilesGrid" class="selected-files-grid"></div>
-        
+
+
+          <div
+            id="selectedFilesGrid"
+            class="selected-files-grid"
+          ></div>
+
+
           <div class="add-more-text">
             אפשר להוסיף עוד תמונות או סרטונים
           </div>
-        
-        </div>
-        
-          <div class="selected-check">✓</div>
 
         </div>
+
 
         <button
           id="uploadButton"
           class="final-upload hidden"
           type="button"
         >
-          העלו עכשיו
+          העלאת הקבצים
         </button>
 
-        <div id="loadingBox" class="loading-box hidden">
+
+        <div
+          id="loadingBox"
+          class="loading-box hidden"
+        >
 
           <div class="loader"></div>
 
-          <strong>מעלים את הזיכרון שלכם…</strong>
+          <strong>
+            מעלים את הזיכרון שלכם…
+          </strong>
 
           <span>
             אל תסגרו את החלון
@@ -147,13 +153,19 @@
 
         </div>
 
-        <p id="statusText" class="status-text"></p>
+
+        <div
+          id="statusText"
+          class="status-text"
+        ></div>
+
 
         <div class="whatsapp">
 
           <div class="whatsapp-title">
             לא עובד לכם? שלחו לנו בוואטסאפ
           </div>
+
 
           <div class="whatsapp-buttons">
 
@@ -164,8 +176,9 @@
               rel="noopener"
             >
               <strong>עדי</strong>
-              <span>054-3330598</span>
+              <span>054-333-0598</span>
             </a>
+
 
             <a
               id="whatsappNitay"
@@ -174,7 +187,7 @@
               rel="noopener"
             >
               <strong>נתאי</strong>
-              <span>052-3357812</span>
+              <span>052-335-7812</span>
             </a>
 
           </div>
@@ -183,20 +196,22 @@
 
       </section>
 
-      <section id="successView" class="mission-card success-card hidden">
+
+      <section
+        id="successView"
+        class="mission-card success-card hidden"
+      >
 
         <div class="success-mark">✓</div>
 
-        <h2>
-          המשימה הושלמה
-        </h2>
+        <h2>המשימה הושלמה</h2>
 
         <p>
-          תודה שהשארתם לנו זיכרון מהחתונה
+          תודה ששמרתם איתנו עוד זיכרון מהחתונה
         </p>
 
         <div class="success-names">
-          Adi & Nitay
+          ADI & NITAY
         </div>
 
       </section>
@@ -204,6 +219,7 @@
     </main>
 
   </div>
+
 
   <script src="/app.js"></script>
 
