@@ -16,7 +16,7 @@ const {
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-const MISSIONS_PATH = path.join(__dirname, 'data', 'missions.json');
+const MISSIONS_PATH = path.join(__dirname, 'missions.json');
 
 // IMPORTANT: this is a *scratch* directory only, used while a single upload
 // is being streamed to Drive. Nothing here is treated as durable storage -
@@ -27,7 +27,7 @@ const TMP_DIR = path.join(os.tmpdir(), 'wedding-mission-app');
 if (!fs.existsSync(TMP_DIR)) fs.mkdirSync(TMP_DIR, { recursive: true });
 
 app.use(express.json());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(__dirname));
 
 // ---------- helpers ----------
 
