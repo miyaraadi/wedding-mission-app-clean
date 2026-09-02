@@ -1,12 +1,11 @@
 :root {
-  --burgundy: #641c26;
-  --burgundy-dark: #421319;
-  --gold: #a77f42;
-  --gold-light: #cfb06f;
-  --cream: #f4ead8;
-  --paper: rgba(248, 240, 225, 0.88);
-  --brown: #3a281f;
-  --muted: #8d7965;
+  --burgundy: #6b1724;
+  --burgundy-dark: #471018;
+  --gold: #a98243;
+  --gold-light: #ceb16f;
+  --cream: #f7edda;
+  --brown: #35231c;
+  --muted: #8e7962;
 }
 
 * {
@@ -17,66 +16,75 @@ html,
 body {
   margin: 0;
   width: 100%;
-  min-height: 100%;
+  height: 100%;
 }
 
 body {
   font-family: "Heebo", sans-serif;
   color: var(--brown);
-  background-image:
+  overflow: hidden;
+
+  background:
     linear-gradient(
-      rgba(237, 220, 191, 0.34),
-      rgba(64, 27, 26, 0.26)
+      rgba(241, 224, 192, 0.20),
+      rgba(75, 33, 26, 0.18)
     ),
     url("/couple-vintage-bg.png");
 
   background-size: cover;
-  background-position: 76% center;
-  background-attachment: fixed;
+  background-position: 50% 35%;
+  background-repeat: no-repeat;
 }
 
 .page {
-  min-height: 100dvh;
-  padding:
-    max(10px, env(safe-area-inset-top))
-    12px
-    max(10px, env(safe-area-inset-bottom));
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  position: relative;
+  width: 100%;
+  height: 100dvh;
+  overflow: hidden;
 
   background:
     linear-gradient(
-      to right,
-      rgba(245, 230, 205, 0.78) 0%,
-      rgba(245, 230, 205, 0.62) 58%,
-      rgba(245, 230, 205, 0.18) 100%
+      to bottom,
+      rgba(248, 235, 211, 0.44) 0%,
+      rgba(248, 235, 211, 0.18) 30%,
+      rgba(248, 235, 211, 0.04) 50%,
+      rgba(83, 34, 28, 0.08) 100%
     );
 }
 
+/* ---------- TOP ---------- */
+
 .hero {
-  width: min(92vw, 620px);
-  margin: 0 auto 8px;
+  position: absolute;
+  top: max(14px, env(safe-area-inset-top));
+  left: 50%;
+  transform: translateX(-50%);
+
+  width: 92%;
   text-align: center;
+  z-index: 3;
 }
 
 .small-title {
+  margin-bottom: 2px;
+
   font-family: "Cormorant Garamond", serif;
   font-size: 12px;
-  letter-spacing: 0.24em;
-  color: #6d522d;
-  margin-bottom: 2px;
+  letter-spacing: 0.30em;
+  color: #6f542f;
 }
 
 .hero h1 {
   margin: 0;
+
   font-family: "Cormorant Garamond", serif;
-  font-size: clamp(38px, 10vw, 62px);
-  line-height: 0.92;
+  font-size: clamp(42px, 10.5vw, 61px);
+  line-height: 0.93;
+
   font-weight: 600;
+  letter-spacing: -0.035em;
+
   color: var(--burgundy);
-  letter-spacing: -0.03em;
 }
 
 .hero h1 span {
@@ -85,65 +93,96 @@ body {
 }
 
 .date {
-  margin-top: 3px;
+  margin-top: 6px;
+
   font-family: "Cormorant Garamond", serif;
-  font-size: clamp(25px, 6.8vw, 40px);
+  font-size: clamp(27px, 6.5vw, 37px);
   line-height: 1;
-  color: #765725;
+
   font-weight: 600;
+  color: #765824;
 }
 
+/* ---------- CARD POSITION ---------- */
+
 main {
-  width: min(92vw, 620px);
-  margin: 0 auto;
+  position: absolute;
+
+  left: 50%;
+  bottom: max(10px, env(safe-area-inset-bottom));
+
+  transform: translateX(-50%);
+
+  width: 92%;
+
+  z-index: 4;
 }
 
 .mission-card {
   width: 100%;
-  padding: 14px 16px 14px;
+  max-height: 64dvh;
+
+  padding: 15px 14px 13px;
+
   text-align: center;
+
+  border-radius: 24px;
 
   background:
     linear-gradient(
-      rgba(249, 242, 229, 0.89),
-      rgba(245, 234, 214, 0.86)
+      145deg,
+      rgba(252, 245, 232, 0.92),
+      rgba(247, 235, 214, 0.88)
     );
 
-  border: 1px solid rgba(165, 123, 60, 0.72);
-  border-radius: 22px;
+  border: 1px solid rgba(169, 126, 59, 0.82);
 
   box-shadow:
-    0 12px 30px rgba(49, 25, 15, 0.18),
+    0 12px 35px rgba(47, 25, 16, 0.22),
     inset 0 0 0 4px rgba(255, 253, 246, 0.34);
 
-  backdrop-filter: blur(1.5px);
+  backdrop-filter: blur(3px);
 }
 
+/* ---------- MISSION ---------- */
+
 .mission-head {
-  margin-bottom: 2px;
+  margin: 0 0 5px;
 }
 
 .mission-label {
-  font-size: 15px;
-  color: #6b5149;
+  font-size: 14px;
+  font-weight: 400;
+  color: #75625b;
 }
 
 .mission-number {
-  margin: -2px 0 1px;
+  margin: 3px 0 0;
+
   font-family: "Cormorant Garamond", serif;
-  color: var(--burgundy);
-  font-size: clamp(54px, 14vw, 82px);
-  line-height: 0.88;
+
+  font-size: clamp(58px, 15vw, 82px);
+  line-height: 0.90;
+
   font-weight: 600;
+
+  color: var(--burgundy);
 }
 
 .mission-text {
-  max-width: 500px;
-  margin: 4px auto 10px;
-  font-size: clamp(19px, 4.7vw, 25px);
-  line-height: 1.18;
+  max-width: 95%;
+
+  margin: 11px auto 13px;
+
+  font-size: clamp(18px, 4.4vw, 22px);
+  line-height: 1.28;
+
   font-weight: 500;
+
+  color: #34231d;
 }
+
+/* ---------- NAME ---------- */
 
 .name-area {
   margin: 0 auto 9px;
@@ -151,77 +190,87 @@ main {
 
 .name-area label {
   display: block;
+
   margin-bottom: 4px;
-  color: var(--burgundy);
-  font-size: 14px;
+
+  font-size: 13px;
   font-weight: 500;
+
+  color: var(--burgundy);
 }
 
 .name-area label span {
-  margin-right: 4px;
-  color: var(--muted);
+  margin-right: 5px;
+
   font-size: 11px;
-  font-weight: 400;
+  font-weight: 300;
+
+  color: var(--muted);
 }
 
 .name-area input {
   width: 100%;
-  height: 38px;
-  border: 1px solid rgba(159, 117, 51, 0.56);
-  border-radius: 10px;
-  background: rgba(255, 251, 242, 0.72);
-  color: var(--brown);
-  text-align: center;
-  padding: 0 10px;
-  outline: none;
-  font-family: "Heebo", sans-serif;
-}
+  height: 37px;
 
-.name-area input:focus {
-  border-color: var(--burgundy);
-  box-shadow: 0 0 0 2px rgba(100, 28, 38, 0.08);
+  padding: 0 10px;
+
+  border: 1px solid rgba(159, 117, 51, 0.58);
+  border-radius: 10px;
+
+  outline: none;
+
+  background: rgba(255, 251, 242, 0.72);
+
+  text-align: center;
+
+  font-family: "Heebo", sans-serif;
+  font-size: 13px;
+
+  color: var(--brown);
 }
 
 .name-area input::placeholder {
-  color: #a48f79;
+  color: #a2917d;
 }
 
+/* ---------- CHOOSE FILE ---------- */
+
 .upload-title {
-  margin: 2px 0 7px;
+  margin: 0 0 7px;
+
   font-size: 14px;
   font-weight: 500;
-  color: #62433b;
+
+  color: #533a32;
 }
 
 .upload-buttons {
   display: grid;
   grid-template-columns: 1fr 1fr;
+
   gap: 8px;
 }
 
 .upload-btn {
-  min-height: 72px;
-  padding: 9px 7px;
-  border-radius: 12px;
+  min-height: 68px;
+
+  padding: 8px 6px;
 
   display: flex;
   flex-direction: column;
+
   align-items: center;
   justify-content: center;
+
   gap: 4px;
+
+  border-radius: 12px;
+  border: 1px solid var(--gold-light);
 
   cursor: pointer;
 
-  border: 1px solid var(--gold-light);
-  box-shadow: 0 5px 12px rgba(70, 38, 19, 0.11);
-
-  transition:
-    transform 0.15s ease,
-    box-shadow 0.15s ease;
-}
-
-.upload-btn:active {
-  transform: scale(0.985);
+  box-shadow:
+    0 4px 10px rgba(64, 35, 20, 0.12);
 }
 
 .upload-btn strong {
@@ -230,178 +279,252 @@ main {
 }
 
 .burgundy {
-  background: linear-gradient(145deg, #75242e, #51151d);
+  background:
+    linear-gradient(
+      145deg,
+      #79222e,
+      #54151e
+    );
+
   color: #fff8eb;
 }
 
 .gold {
-  background: linear-gradient(145deg, #b18a4a, #8c682f);
+  background:
+    linear-gradient(
+      145deg,
+      #b18a49,
+      #8d682e
+    );
+
   color: #fff9ed;
 }
 
-/* clean line icons */
+/* ---------- CLEAN ICONS ---------- */
+
 .line-icon {
   position: relative;
+
   display: block;
-  width: 24px;
+
+  width: 25px;
   height: 20px;
 }
 
 .camera-icon {
-  border: 1.7px solid currentColor;
+  border: 1.6px solid currentColor;
   border-radius: 5px;
 }
 
 .camera-icon::before {
   content: "";
+
   position: absolute;
-  width: 7px;
+
+  width: 8px;
   height: 4px;
-  border: 1.7px solid currentColor;
-  border-bottom: 0;
-  border-radius: 3px 3px 0 0;
+
   top: -5px;
   left: 7px;
+
+  border: 1.6px solid currentColor;
+  border-bottom: 0;
+
+  border-radius: 3px 3px 0 0;
 }
 
 .camera-icon::after {
   content: "";
+
   position: absolute;
+
   width: 7px;
   height: 7px;
-  border: 1.7px solid currentColor;
-  border-radius: 50%;
+
   top: 5px;
   left: 7px;
+
+  border: 1.6px solid currentColor;
+  border-radius: 50%;
 }
 
 .image-icon {
-  border: 1.7px solid currentColor;
+  border: 1.6px solid currentColor;
   border-radius: 4px;
 }
 
 .image-icon::before {
   content: "";
+
   position: absolute;
+
   width: 5px;
   height: 5px;
-  border: 1.5px solid currentColor;
-  border-radius: 50%;
+
   top: 4px;
   right: 4px;
+
+  border: 1.4px solid currentColor;
+  border-radius: 50%;
 }
 
 .image-icon::after {
   content: "";
+
   position: absolute;
-  left: 4px;
-  bottom: 4px;
-  width: 14px;
+
+  width: 13px;
   height: 8px;
-  border-left: 1.7px solid currentColor;
-  border-bottom: 1.7px solid currentColor;
-  transform: skewY(-35deg);
+
+  bottom: 4px;
+  left: 4px;
+
+  border-left: 1.6px solid currentColor;
+  border-bottom: 1.6px solid currentColor;
+
+  transform: skewY(-34deg);
 }
 
-.selected-file {
-  margin-top: 8px;
-  padding: 8px 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
+/* ---------- SELECTED FILE ---------- */
 
-  border: 1px solid rgba(154, 116, 55, 0.42);
-  border-radius: 10px;
-  background: rgba(255, 250, 239, 0.72);
+.selected-file {
+  margin-top: 7px;
+
+  padding: 7px 9px;
+
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+
+  gap: 7px;
+
+  border-radius: 9px;
+
+  border: 1px solid rgba(156, 115, 53, 0.42);
+
+  background:
+    rgba(255, 250, 238, 0.75);
 }
 
 .selected-check {
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
+  width: 22px;
+  height: 22px;
 
   display: flex;
+
   align-items: center;
   justify-content: center;
 
+  border-radius: 50%;
+
   background: var(--burgundy);
-  color: #fff;
-  font-size: 14px;
+  color: white;
+
+  font-size: 12px;
 }
 
 .selected-file strong {
   display: block;
-  font-size: 13px;
+
+  font-size: 12px;
+
   color: var(--burgundy);
 }
 
 .selected-file span {
   display: block;
-  max-width: 260px;
+
+  max-width: 220px;
+
   overflow: hidden;
-  text-overflow: ellipsis;
+
   white-space: nowrap;
+  text-overflow: ellipsis;
+
   direction: ltr;
-  font-size: 10px;
+
+  font-size: 9px;
+
   color: var(--muted);
 }
 
+/* ---------- FINAL UPLOAD ---------- */
+
 .final-upload {
   width: 100%;
-  height: 42px;
-  margin-top: 8px;
+  height: 39px;
+
+  margin-top: 7px;
 
   border: 1px solid var(--gold-light);
-  border-radius: 11px;
+  border-radius: 10px;
 
-  background: linear-gradient(145deg, #6f1d27, #4a1118);
+  background:
+    linear-gradient(
+      145deg,
+      #741f2a,
+      #4b1118
+    );
+
   color: #fff8e8;
 
   font-family: "Heebo", sans-serif;
-  font-size: 15px;
+
+  font-size: 14px;
   font-weight: 500;
 
   cursor: pointer;
-  box-shadow: 0 5px 14px rgba(77, 26, 23, 0.16);
 }
 
-.loading-box {
-  margin-top: 8px;
-  min-height: 70px;
-  padding: 10px;
+/* ---------- LOADING ---------- */
 
-  border-radius: 12px;
-  background: rgba(91, 24, 33, 0.94);
-  color: #fff7e9;
+.loading-box {
+  margin-top: 7px;
+
+  padding: 9px;
+
+  min-height: 62px;
 
   display: flex;
+
   flex-direction: column;
+
   align-items: center;
   justify-content: center;
+
+  border-radius: 11px;
+
+  background:
+    rgba(91, 24, 33, 0.95);
+
+  color: #fff7e9;
 }
 
 .loading-box strong {
-  margin-top: 5px;
-  font-size: 14px;
+  margin-top: 4px;
+
+  font-size: 13px;
+
   font-weight: 500;
 }
 
 .loading-box span {
-  margin-top: 1px;
-  font-size: 10px;
-  opacity: 0.8;
+  font-size: 9px;
+
+  opacity: 0.82;
 }
 
 .loader {
-  width: 22px;
-  height: 22px;
+  width: 20px;
+  height: 20px;
+
   border-radius: 50%;
 
   border: 2px solid rgba(255, 255, 255, 0.25);
-  border-top-color: #fff4db;
+  border-top-color: #fff5dd;
 
-  animation: spin 0.85s linear infinite;
+  animation: spin 0.8s linear infinite;
 }
 
 @keyframes spin {
@@ -411,145 +534,167 @@ main {
 }
 
 .status-text {
+  margin: 4px 0 0;
+
   min-height: 0;
-  margin: 5px 0 0;
+
+  font-size: 11px;
+
   color: var(--burgundy);
-  font-size: 12px;
 }
 
+/* ---------- WHATSAPP ---------- */
+
 .whatsapp {
-  margin-top: 9px;
-  padding-top: 8px;
+  margin-top: 8px;
+  padding-top: 7px;
+
   border-top: 1px solid rgba(162, 122, 50, 0.34);
 }
 
 .whatsapp-title {
-  margin-bottom: 6px;
-  font-size: 13px;
+  margin-bottom: 5px;
+
+  font-size: 12px;
   font-weight: 500;
+
   color: var(--burgundy-dark);
 }
 
 .whatsapp-buttons {
   display: grid;
   grid-template-columns: 1fr 1fr;
+
   gap: 7px;
 }
 
 .whatsapp-buttons a {
-  min-height: 48px;
-  padding: 6px;
+  min-height: 43px;
+
+  padding: 4px;
 
   display: flex;
+
   flex-direction: column;
+
   align-items: center;
   justify-content: center;
 
   text-decoration: none;
 
-  border: 1px solid rgba(153, 111, 48, 0.52);
-  border-radius: 10px;
+  border: 1px solid rgba(153, 111, 48, 0.50);
+  border-radius: 9px;
+
+  background:
+    rgba(255, 249, 237, 0.70);
 
   color: var(--burgundy-dark);
-  background: rgba(255, 249, 237, 0.72);
 }
 
 .whatsapp-buttons a strong {
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 500;
 }
 
 .whatsapp-buttons a span {
-  direction: ltr;
   margin-top: 1px;
-  color: #7d6134;
-  font-size: 10px;
+
+  direction: ltr;
+
+  font-size: 9px;
+
+  color: #7e6237;
+}
+
+/* ---------- SUCCESS ---------- */
+
+.success-card {
+  padding: 26px 18px;
+}
+
+.success-mark {
+  width: 42px;
+  height: 42px;
+
+  margin: 0 auto 8px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: var(--burgundy);
+
+  color: white;
+
+  font-size: 21px;
+}
+
+.success-card h2 {
+  margin: 0 0 5px;
+
+  font-family: "Cormorant Garamond", serif;
+
+  font-size: 32px;
+
+  color: var(--burgundy);
+}
+
+.success-card p {
+  margin: 0;
+
+  font-size: 14px;
+}
+
+.success-names {
+  margin-top: 9px;
+
+  font-family: "Cormorant Garamond", serif;
+
+  font-size: 26px;
+
+  color: var(--gold);
 }
 
 .hidden {
   display: none !important;
 }
 
-.success-card {
-  padding: 28px 18px;
-}
+/* ---------- SMALL PHONES ---------- */
 
-.success-mark {
-  width: 44px;
-  height: 44px;
-  margin: 0 auto 8px;
+@media (max-height: 740px) {
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  border-radius: 50%;
-  background: var(--burgundy);
-  color: white;
-  font-size: 22px;
-}
-
-.success-card h2 {
-  margin: 0 0 5px;
-  font-family: "Cormorant Garamond", serif;
-  color: var(--burgundy);
-  font-size: 34px;
-}
-
-.success-card p {
-  margin: 0;
-  font-size: 15px;
-}
-
-.success-names {
-  margin-top: 10px;
-  font-family: "Cormorant Garamond", serif;
-  color: var(--gold);
-  font-size: 27px;
-}
-
-@media (max-width: 600px) {
-  body {
-    background-position: 80% center;
-  }
-
-  .page {
-    justify-content: flex-start;
-    padding-top: max(8px, env(safe-area-inset-top));
-  }
-
-  .hero {
-    margin-bottom: 6px;
-  }
-
-  .mission-card {
-    padding: 12px 12px 11px;
-  }
-}
-
-@media (max-height: 760px) {
   .hero h1 {
-    font-size: 38px;
+    font-size: 39px;
   }
 
   .date {
-    font-size: 25px;
+    font-size: 26px;
+  }
+
+  main {
+    width: 93%;
+  }
+
+  .mission-card {
+    max-height: 65dvh;
+    padding-top: 10px;
   }
 
   .mission-number {
-    font-size: 56px;
+    font-size: 57px;
   }
 
   .mission-text {
-    font-size: 19px;
-    margin-bottom: 7px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+
+    font-size: 18px;
   }
 
   .upload-btn {
-    min-height: 64px;
-  }
-
-  .whatsapp-buttons a {
-    min-height: 43px;
+    min-height: 61px;
   }
 }
