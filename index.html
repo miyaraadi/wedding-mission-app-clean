@@ -2,8 +2,19 @@
 <html lang="he" dir="rtl">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#5b1720" />
+
   <title>Wedding Mission — Adi & Nitay</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Heebo:wght@300;400;500;600&display=swap"
+    rel="stylesheet"
+  />
+
   <link rel="stylesheet" href="/style.css" />
 </head>
 
@@ -14,7 +25,9 @@
     <header class="hero">
       <div class="small-title">WEDDING MISSION</div>
 
-      <h1>ADI <span>&</span> NITAY</h1>
+      <h1>
+        ADI <span>&</span> NITAY
+      </h1>
 
       <div class="date">
         11.03.2027
@@ -25,69 +38,111 @@
 
       <section id="missionView" class="mission-card">
 
-        <div class="mission-label">
-          משימה
+        <div class="mission-head">
+          <div class="mission-label">משימה</div>
+          <div id="missionNumber" class="mission-number"></div>
         </div>
-
-        <div id="missionNumber" class="mission-number"></div>
 
         <p id="missionText" class="mission-text">
           טוען את המשימה…
         </p>
 
         <div class="name-area">
-          <label for="guestName">מי אתם?</label>
+
+          <label for="guestName">
+            השם שלכם
+            <span>לא חובה</span>
+          </label>
 
           <input
             id="guestName"
             type="text"
-            placeholder="כתבו את השם שלכם"
+            placeholder="אפשר להשאיר שם"
+            maxlength="80"
           />
 
-          <div id="nameError" class="error"></div>
         </div>
 
-        <div class="upload-title">
-          העלו את התמונה / הסרטון שלכם
+        <div class="choose-area">
+
+          <div class="upload-title">
+            בחרו תמונה או סרטון
+          </div>
+
+          <div class="upload-buttons">
+
+            <label class="upload-btn burgundy">
+
+              <span class="line-icon camera-icon" aria-hidden="true"></span>
+
+              <strong>צלמו עכשיו</strong>
+
+              <input
+                id="captureInput"
+                type="file"
+                accept="image/*,video/*"
+                capture="environment"
+                hidden
+              />
+
+            </label>
+
+            <label class="upload-btn gold">
+
+              <span class="line-icon image-icon" aria-hidden="true"></span>
+
+              <strong>בחרו מהגלריה</strong>
+
+              <input
+                id="chooseInput"
+                type="file"
+                accept="image/*,video/*"
+                hidden
+              />
+
+            </label>
+
+          </div>
+
         </div>
 
-        <div class="upload-buttons">
+        <div id="selectedFileBox" class="selected-file hidden">
 
-          <label class="upload-btn burgundy">
-            <div class="button-icon">📷</div>
-            <strong>צלמו עכשיו</strong>
-            <small>השתמשו במצלמה</small>
+          <div class="selected-check">✓</div>
 
-            <input
-              id="captureInput"
-              type="file"
-              accept="image/*,video/*"
-              capture="environment"
-              hidden
-            />
-          </label>
-
-          <label class="upload-btn gold">
-            <div class="button-icon">▧</div>
-            <strong>בחרו מהגלריה</strong>
-            <small>תמונה או סרטון</small>
-
-            <input
-              id="chooseInput"
-              type="file"
-              accept="image/*,video/*"
-              hidden
-            />
-          </label>
+          <div>
+            <strong>הקובץ מוכן להעלאה</strong>
+            <span id="selectedFileName"></span>
+          </div>
 
         </div>
 
-        <p id="statusText"></p>
+        <button
+          id="uploadButton"
+          class="final-upload hidden"
+          type="button"
+        >
+          העלו עכשיו
+        </button>
+
+        <div id="loadingBox" class="loading-box hidden">
+
+          <div class="loader"></div>
+
+          <strong>מעלים את הזיכרון שלכם…</strong>
+
+          <span>
+            אל תסגרו את החלון
+          </span>
+
+        </div>
+
+        <p id="statusText" class="status-text"></p>
 
         <div class="whatsapp">
 
           <div class="whatsapp-title">
-            לא עובד לכם? שלחו לנו בוואטסאפ ♥
+            לא עובד לכם? שלחו לנו בוואטסאפ
           </div>
 
           <div class="whatsapp-buttons">
@@ -96,8 +151,9 @@
               id="whatsappAdi"
               href="#"
               target="_blank"
+              rel="noopener"
             >
-              שלחו לעדי
+              <strong>עדי</strong>
               <span>054-3330598</span>
             </a>
 
@@ -105,8 +161,9 @@
               id="whatsappNitay"
               href="#"
               target="_blank"
+              rel="noopener"
             >
-              שלחו לנתאי
+              <strong>נתאי</strong>
               <span>052-3357812</span>
             </a>
 
@@ -116,14 +173,12 @@
 
       </section>
 
-      <section id="successView" class="mission-card hidden">
+      <section id="successView" class="mission-card success-card hidden">
 
-        <div class="small-title">
-          MISSION COMPLETE
-        </div>
+        <div class="success-mark">✓</div>
 
         <h2>
-          המשימה הושלמה ♥
+          המשימה הושלמה
         </h2>
 
         <p>
@@ -137,10 +192,6 @@
       </section>
 
     </main>
-
-    <footer>
-      תודה שאתם חלק מהיום המיוחד שלנו ♥
-    </footer>
 
   </div>
 
