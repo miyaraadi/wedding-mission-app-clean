@@ -625,8 +625,54 @@ main {
   gap: 7px;
 
   width: 100%;
+
+  /*
+    גובה של שורה אחת בלבד.
+    אם יש יותר מ-3 קבצים,
+    הגלילה תהיה בתוך האזור הזה.
+  */
+  max-height: 105px;
+
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  padding: 1px 3px 1px 1px;
+
+  overscroll-behavior: contain;
+
+  -webkit-overflow-scrolling: touch;
+
+  scrollbar-width: thin;
+  scrollbar-color:
+    rgba(107, 23, 36, 0.55)
+    rgba(181, 137, 66, 0.12);
+}
+/* scrollbar - Chrome / Safari */
+
+.selected-files-grid::-webkit-scrollbar {
+  width: 5px;
 }
 
+.selected-files-grid::-webkit-scrollbar-track {
+  background:
+    rgba(181, 137, 66, 0.10);
+
+  border-radius: 10px;
+}
+
+.selected-files-grid::-webkit-scrollbar-thumb {
+  background:
+    rgba(107, 23, 36, 0.55);
+
+  border-radius: 10px;
+}
+
+
+/* hint that more files are below */
+
+.selected-files-area {
+  position: relative;
+}
 
 .file-preview {
   position: relative;
