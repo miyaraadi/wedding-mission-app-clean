@@ -11,7 +11,7 @@ const {
   exchangeCodeForTokens,
   uploadFileToDrive,
   listUploadsFromDrive,
-} = require('./lib/googleDrive');
+} = require('./googleDrive');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
