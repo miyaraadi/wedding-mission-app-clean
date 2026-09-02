@@ -23,17 +23,30 @@ body {
   font-family: Georgia, "Times New Roman", serif;
   color: var(--brown);
   background:
-    radial-gradient(circle at top, #e7d2a8 0%, #b88c55 55%, #654323 100%);
+    linear-gradient(
+      rgba(74, 35, 28, 0.35),
+      rgba(74, 35, 28, 0.48)
+    ),
+    url("/couple-vintage-bg.png");
+
+  background-size: cover;
+  background-position: 70% center;
+  background-attachment: fixed;
 }
 
 .page {
   min-height: 100vh;
   padding: 24px 14px 34px;
+
   background:
     linear-gradient(
-      rgba(244, 229, 198, 0.56),
-      rgba(91, 30, 26, 0.34)
+      to bottom,
+      rgba(238, 221, 188, 0.72) 0%,
+      rgba(238, 221, 188, 0.48) 32%,
+      rgba(80, 27, 28, 0.28) 100%
     );
+
+  backdrop-filter: sepia(0.35);
 }
 
 .hero {
@@ -322,4 +335,15 @@ footer {
   .whatsapp-buttons {
     gap: 8px;
   }
+  body {
+  background-position: 72% center;
+}
+
+main {
+  width: min(94vw, 700px);
+}
+
+.hero {
+  width: 94vw;
+}
 }
