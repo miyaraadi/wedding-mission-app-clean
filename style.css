@@ -84,13 +84,15 @@ body::before {
 }
 
 .small-title {
-  margin-bottom: 2px;
+  margin-bottom: 5px;
 
   font-family: "Cormorant Garamond", serif;
-  font-size: 13px;
-  letter-spacing: 0.30em;
+  font-size: 17px;
+  font-weight: 600;
 
-  color: #6d502b;
+  letter-spacing: 0.36em;
+
+  color: #74572e;
 }
 
 .hero h1 {
@@ -98,11 +100,12 @@ body::before {
 
   font-family: "Cormorant Garamond", serif;
 
-  font-size: clamp(50px, 12vw, 72px);
-  line-height: 0.94;
+  font-size: clamp(58px, 14vw, 82px);
+  line-height: 0.92;
 
   font-weight: 600;
-  letter-spacing: -0.035em;
+
+  letter-spacing: 0.015em;
 
   color: var(--burgundy);
 }
@@ -110,23 +113,27 @@ body::before {
 .hero h1 span {
   color: var(--gold);
   font-weight: 500;
+
+  margin: 0 0.06em;
 }
 
 .date {
-  margin-top: 8px;
+  margin-top: 10px;
 
-  font-family: "Cormorant Garamond", serif;
+  font-family: "Playfair Display", serif;
 
-  font-size: clamp(50px, 13vw, 74px);
-  line-height: 0.92;
+  font-size: clamp(54px, 14vw, 80px);
+  line-height: 1;
 
   font-weight: 600;
 
-  color: #b38a3f;
+  letter-spacing: 0.025em;
+
+  color: #b78a36;
 
   text-shadow:
-    0 1px 0 rgba(255, 245, 215, 0.45),
-    0 2px 8px rgba(92, 58, 16, 0.10);
+    0 1px 0 rgba(255, 245, 213, 0.55),
+    0 3px 10px rgba(73, 47, 13, 0.12);
 }
 
 /* ---------------- MAIN ---------------- */
@@ -222,19 +229,18 @@ main {
 
 .name-area label {
   display: block;
+  margin-bottom: 5px;
 
-  margin-bottom: 4px;
-
-  font-size: 13px;
+  font-size: 16px;
   font-weight: 500;
 
   color: var(--burgundy);
 }
 
 .name-area label span {
-  margin-right: 5px;
+  margin-right: 6px;
 
-  font-size: 11px;
+  font-size: 13px;
   font-weight: 300;
 
   color: var(--muted);
@@ -256,7 +262,7 @@ main {
   text-align: center;
 
   font-family: "Heebo", sans-serif;
-  font-size: 13px;
+  font-size: 15px;
 
   color: var(--brown);
 }
@@ -587,9 +593,9 @@ main {
 }
 
 .whatsapp-title {
-  margin-bottom: 6px;
+  margin-bottom: 7px;
 
-  font-size: 12px;
+  font-size: 15px;
   font-weight: 500;
 
   color: var(--burgundy-dark);
@@ -629,16 +635,16 @@ main {
 }
 
 .whatsapp-buttons a strong {
-  font-size: 12px;
+  font-size: 15px;
   font-weight: 500;
 }
 
 .whatsapp-buttons a span {
-  margin-top: 1px;
+  margin-top: 2px;
 
   direction: ltr;
 
-  font-size: 9px;
+  font-size: 13px;
 
   color: #7e6237;
 }
@@ -670,11 +676,15 @@ main {
 }
 
 .success-card h2 {
-  margin: 0 0 5px;
+  margin: 4px 0 8px;
 
-  font-family: "Cormorant Garamond", serif;
+  font-family: "Heebo", sans-serif;
 
-  font-size: 34px;
+  font-size: 30px;
+
+  line-height: 1.2;
+
+  font-weight: 500;
 
   color: var(--burgundy);
 }
@@ -682,17 +692,24 @@ main {
 .success-card p {
   margin: 0;
 
-  font-size: 14px;
+  font-family: "Heebo", sans-serif;
+
+  font-size: 17px;
+  line-height: 1.4;
+
+  font-weight: 400;
 }
 
 .success-names {
-  margin-top: 9px;
+  margin-top: 14px;
 
   font-family: "Cormorant Garamond", serif;
 
-  font-size: 28px;
+  font-size: 36px;
 
   color: var(--gold);
+
+  letter-spacing: 0.03em;
 }
 
 .hidden {
