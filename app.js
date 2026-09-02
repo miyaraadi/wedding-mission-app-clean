@@ -5,19 +5,29 @@
   const missionNumberEl = document.getElementById('missionNumber');
   const missionTextEl = document.getElementById('missionText');
   const statusEl = document.getElementById('statusText');
+
   const missionView = document.getElementById('missionView');
   const successView = document.getElementById('successView');
+
   const captureInput = document.getElementById('captureInput');
   const chooseInput = document.getElementById('chooseInput');
 
   const guestNameInput = document.getElementById('guestName');
-  const nameError = document.getElementById('nameError');
+
+  const selectedFileBox = document.getElementById('selectedFileBox');
+  const selectedFileName = document.getElementById('selectedFileName');
+
+  const uploadButton = document.getElementById('uploadButton');
+
+  const loadingBox = document.getElementById('loadingBox');
 
   const whatsappAdi = document.getElementById('whatsappAdi');
   const whatsappNitay = document.getElementById('whatsappNitay');
 
   const ADI_PHONE = '972543330598';
   const NITAY_PHONE = '972523357812';
+
+  let selectedFile = null;
 
   if (!missionId) {
     missionNumberEl.textContent = '';
@@ -45,23 +55,12 @@
     return guestNameInput.value.trim();
   }
 
-  function validateName() {
-    if (!getGuestName()) {
-      nameError.textContent = 'כתבו קודם את השם שלכם ♥';
-      guestNameInput.focus();
-      return false;
-    }
-
-    nameError.textContent = '';
-    return true;
-  }
-
   function createWhatsappMessage() {
-    const name = getGuestName();
-
     let message =
       `היי ❤️ לא הצלחתי להעלות דרך האתר.\n` +
       `אני שולח/ת כאן את התמונה או הסרטון של משימה #${missionId}.`;
+
+    const name = getGuestName();
 
     if (name) {
       message += `\nהשם שלי: ${name}`;
@@ -71,9 +70,9 @@
   }
 
   function createWhatsappLink(phone) {
-    const message = encodeURIComponent(createWhatsappMessage());
-
-    return `https://wa.me/${phone}?text=${message}`;
+    return `https://wa.me/${phone}?text=${encodeURIComponent(
+      createWhatsappMessage()
+    )}`;
   }
 
   function updateWhatsappLinks() {
@@ -83,35 +82,59 @@
 
   updateWhatsappLinks();
 
-  guestNameInput.addEventListener('input', () => {
-    nameError.textContent = '';
-    updateWhatsappLinks();
-  });
+  guestNameInput.addEventListener('input', updateWhatsappLinks);
 
-  whatsappAdi.addEventListener('click', () => {
-    updateWhatsappLinks();
-  });
+  whatsappAdi.addEventListener('click', updateWhatsappLinks);
+  whatsappNitay.addEventListener('click', updateWhatsappLinks);
 
-  whatsappNitay.addEventListener('click', () => {
-    updateWhatsappLinks();
-  });
-
-  async function handleFile(file) {
+  function selectFile(file) {
     if (!file) return;
 
-    if (!validateName()) {
-      captureInput.value = '';
-      chooseInput.value = '';
+    selectedFile = file;
+
+    selectedFileName.textContent = file.name;
+
+    selectedFileBox.classList.remove('hidden');
+    uploadButton.classList.remove('hidden');
+
+    statusEl.textContent = '';
+  }
+
+  captureInput.addEventListener('change', (e) => {
+    selectFile(e.target.files[0]);
+  });
+
+  chooseInput.addEventListener('change', (e) => {
+    selectFile(e.target.files[0]);
+  });
+
+  uploadButton.addEventListener('click', async () => {
+    if (!selectedFile) {
+      statusEl.textContent = 'בחרו קודם תמונה או סרטון.';
       return;
     }
 
-    statusEl.textContent = 'מעלים… אנא המתינו ♥';
+    uploadButton.classList.add('hidden');
+    selectedFileBox.classList.add('hidden');
+
+    loadingBox.classList.remove('hidden');
+
+    captureInput.disabled = true;
+    chooseInput.disabled = true;
+    guestNameInput.disabled = true;
+
+    statusEl.textContent = '';
 
     const formData = new FormData();
 
-    formData.append('file', file);
+    formData.append('file', selectedFile);
     formData.append('mission_id', missionId);
-    formData.append('uploader_name', getGuestName());
+
+    const name = getGuestName();
+
+    if (name) {
+      formData.append('uploader_name', name);
+    }
 
     try {
       const res = await fetch('/api/upload', {
@@ -119,11 +142,15 @@
         body: formData,
       });
 
-      const data = await res.json();
+      let data = {};
+
+      try {
+        data = await res.json();
+      } catch (_) {}
 
       if (!res.ok || !data.success) {
         throw new Error(
-          data.message || 'ההעלאה נכשלה, נסו שוב.'
+          data.message || 'ההעלאה נכשלה. נסו שוב.'
         );
       }
 
@@ -132,24 +159,22 @@
 
       window.scrollTo({
         top: 0,
-        behavior: 'smooth'
+        behavior: 'smooth',
       });
 
     } catch (err) {
+      loadingBox.classList.add('hidden');
+
+      selectedFileBox.classList.remove('hidden');
+      uploadButton.classList.remove('hidden');
+
+      captureInput.disabled = false;
+      chooseInput.disabled = false;
+      guestNameInput.disabled = false;
+
       statusEl.textContent =
         err.message ||
-        'ההעלאה נכשלה. אפשר גם לשלוח לנו בוואטסאפ ♥';
+        'ההעלאה נכשלה. אפשר גם לשלוח לנו בוואטסאפ.';
     }
-
-    captureInput.value = '';
-    chooseInput.value = '';
-  }
-
-  captureInput.addEventListener('change', (e) => {
-    handleFile(e.target.files[0]);
-  });
-
-  chooseInput.addEventListener('change', (e) => {
-    handleFile(e.target.files[0]);
   });
 })();
