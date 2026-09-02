@@ -3,75 +3,146 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>משימת החתונה</title>
+  <title>Wedding Mission — Adi & Nitay</title>
   <link rel="stylesheet" href="/style.css" />
 </head>
 
 <body>
 
-  <main class="card">
+  <div class="page">
 
-    <section id="missionView">
+    <header class="hero">
+      <div class="small-title">WEDDING MISSION</div>
 
-      <div class="eyebrow">WEDDING MISSION</div>
-
-      <h1 id="missionNumber"></h1>
-
-      <p id="missionText">
-        טוען את המשימה…
-      </p>
-
-      <div class="upload-buttons">
-
-        <label class="upload-btn">
-          📸 צלמו עכשיו
-          <input
-            id="captureInput"
-            type="file"
-            accept="image/*,video/*"
-            capture="environment"
-            hidden
-          />
-        </label>
-
-        <label class="upload-btn secondary">
-          📁 בחרו מהטלפון
-          <input
-            id="chooseInput"
-            type="file"
-            accept="image/*,video/*"
-            hidden
-          />
-        </label>
-
-      </div>
-
-      <p id="statusText"></p>
+      <h1>ADI <span>&</span> NITAY</h1>
 
       <div class="date">
-        11.3.27
+        11.03.2027
       </div>
+    </header>
 
-    </section>
+    <main>
 
+      <section id="missionView" class="mission-card">
 
-    <section id="successView" class="hidden">
+        <div class="mission-label">
+          משימה
+        </div>
 
-      <div class="eyebrow">MISSION COMPLETE</div>
+        <div id="missionNumber" class="mission-number"></div>
 
-      <h1>המשימה הושלמה ❤️</h1>
+        <p id="missionText" class="mission-text">
+          טוען את המשימה…
+        </p>
 
-      <p>
-        תודה שהשארתם לנו זיכרון מהחתונה
-      </p>
+        <div class="name-area">
+          <label for="guestName">מי אתם?</label>
 
-      <div class="date">
-        11.3.27
-      </div>
+          <input
+            id="guestName"
+            type="text"
+            placeholder="כתבו את השם שלכם"
+          />
 
-    </section>
+          <div id="nameError" class="error"></div>
+        </div>
 
-  </main>
+        <div class="upload-title">
+          העלו את התמונה / הסרטון שלכם
+        </div>
+
+        <div class="upload-buttons">
+
+          <label class="upload-btn burgundy">
+            <div class="button-icon">📷</div>
+            <strong>צלמו עכשיו</strong>
+            <small>השתמשו במצלמה</small>
+
+            <input
+              id="captureInput"
+              type="file"
+              accept="image/*,video/*"
+              capture="environment"
+              hidden
+            />
+          </label>
+
+          <label class="upload-btn gold">
+            <div class="button-icon">▧</div>
+            <strong>בחרו מהגלריה</strong>
+            <small>תמונה או סרטון</small>
+
+            <input
+              id="chooseInput"
+              type="file"
+              accept="image/*,video/*"
+              hidden
+            />
+          </label>
+
+        </div>
+
+        <p id="statusText"></p>
+
+        <div class="whatsapp">
+
+          <div class="whatsapp-title">
+            לא עובד לכם? שלחו לנו בוואטסאפ ♥
+          </div>
+
+          <div class="whatsapp-buttons">
+
+            <a
+              id="whatsappAdi"
+              href="#"
+              target="_blank"
+            >
+              שלחו לעדי
+              <span>054-3330598</span>
+            </a>
+
+            <a
+              id="whatsappNitay"
+              href="#"
+              target="_blank"
+            >
+              שלחו לנתאי
+              <span>052-3357812</span>
+            </a>
+
+          </div>
+
+        </div>
+
+      </section>
+
+      <section id="successView" class="mission-card hidden">
+
+        <div class="small-title">
+          MISSION COMPLETE
+        </div>
+
+        <h2>
+          המשימה הושלמה ♥
+        </h2>
+
+        <p>
+          תודה שהשארתם לנו זיכרון מהחתונה
+        </p>
+
+        <div class="success-names">
+          Adi & Nitay
+        </div>
+
+      </section>
+
+    </main>
+
+    <footer>
+      תודה שאתם חלק מהיום המיוחד שלנו ♥
+    </footer>
+
+  </div>
 
   <script src="/app.js"></script>
 
