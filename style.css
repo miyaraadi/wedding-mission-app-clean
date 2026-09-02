@@ -111,14 +111,16 @@ body::before {
 
   font-family: "Cormorant Garamond", serif;
 
-  font-size: clamp(58px, 14vw, 82px);
+  font-size: clamp(52px, 12vw, 78px);
   line-height: 0.92;
 
   font-weight: 600;
 
-  letter-spacing: 0.015em;
+  letter-spacing: 0.005em;
 
   color: var(--burgundy);
+
+  white-space: nowrap;
 }
 
 .hero h1 span {
@@ -129,7 +131,7 @@ body::before {
 }
 
 .date {
-  margin-top: 9px;
+  margin-top: 3px;
 
   font-family: "Playfair Display", serif;
 
@@ -140,10 +142,9 @@ body::before {
 
   letter-spacing: 0.02em;
 
-  color: #d3a844;
+  color: #b58942;
 
-  text-shadow:
-    0 1px 1px rgba(92, 55, 16, 0.16);
+  text-shadow: none;
 }
 
 /* ---------------- MAIN ---------------- */
@@ -787,4 +788,19 @@ main {
     font-size: 18px;
   }
 
+}
+@media (max-width: 380px) {
+  .hero h1 {
+    font-size: 47px;
+    letter-spacing: -0.01em;
+  }
+
+  .date {
+    font-size: 49px;
+  }
+
+  .small-title {
+    font-size: 15px;
+    letter-spacing: 0.27em;
+  }
 }
